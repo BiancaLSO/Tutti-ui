@@ -1,0 +1,102 @@
+/* to be moved */
+
+
+nav{
+    height: 2.5rem;
+}
+footer{
+    position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;   
+}
+
+
+
+
+/* general form style */
+
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+    justify-content: center;
+    padding: 3vw 4vw;
+    height: auto;
+    left: 50%;
+    top: 40%;
+    position  : absolute;
+    transform : translate(-50%, -50%);
+    background-color: #f9f9f9;
+}
+input, label {
+    display:block;
+}
+
+label{
+    text-align: left;
+    color: #777777;
+    padding-bottom: 1rem;
+
+}
+ input{
+    width: 21rem;
+    height: 2rem;
+    border-radius: 10px;
+    margin-top: .5rem;
+    border: 1px solid #DDDDDD;
+    filter: drop-shadow(0 2px 4px #00000014);
+    text-indent:15px;
+ }
+
+ input::placeholder {
+    font-weight: bold;
+    color: #777777;
+    padding-left: .2rem;
+    opacity: .7;
+}
+
+/* signup style */
+
+h2{
+    display: flex;
+    padding-left: 2rem;
+    color: #353A5D;
+    text-align: center;
+    justify-content: center;
+    ;
+}
+
+ input[type="radio"]{
+    display: flex !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    text-align: center;
+    flex-direction: row!important;
+    row-gap: 0 !important;
+
+ }
+
+ .radio{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: .3rem;
+
+ }
+
+ input[type="submit"]{
+    height: 2rem;
+    border-radius: 7px; 
+    background-color: #353A5D;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none; 
+    display: inline-block;
+    font-size: 1rem;
+    filter: drop-shadow(0 2px 4px #00000029);
+    font-weight: 700;
+
+ }
+
