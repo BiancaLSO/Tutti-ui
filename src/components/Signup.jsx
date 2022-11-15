@@ -1,87 +1,96 @@
 import { useState } from "react";
-import styles from  "./Signup.module.css"
+import styles from "./Signup.module.css";
 
 export default function SignUp() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword] = useState("");
-  const [isMusician, setIsMusician] = useState(false);
+  const [user, setUser] = useState({});
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+    let currentUser = {
+      username: event.currentTarget.elements.username.value,
+      email: event.currentTarget.elements.email.value,
+      password: event.currentTarget.elements.password.value,
+      // isMusician: event.currentTarget.elements.isMusician.value,
+    };
 
-  async function handleSubmit() {
-    let user = { username, email, password, confirmPassword, isMusician };
-    let result = await fetch("http://localhost:3000/signup", {
+    const response = await createUser(currentUser);
+    console.log(response);
+  }
+
+  async function createUser(user) {
+    const response = await fetch("http://localhost:3000/signup", {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
       },
-      body: JSON.stringfy(user),
+      mode: "cors",
+      body: JSON.stringify(user),
     });
-    result = await result.json();
+
+    const res = await response.json();
+    setUser((user) => ({
+      ...user,
+      ...res,
+    }));
+    return res;
   }
 
   return (
     <>
-    <nav>
-This is a navigation
-    </nav>
-    <h2>Sign Up</h2>
-      <form method="POST" action="http://localhost:3000/signup" className={styles}>
-        <label>Username
+      <nav>This is a navigation</nav>
+      <h2>Sign Up</h2>
+      <form className={styles} onSubmit={handleSubmit}>
+        <label>
+          Username
           <input
             type="text"
             placeholder="Username"
-            name="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            defaultValue={user.username}
           />
         </label>
 
-        <label>E-mail
+        <label>
+          E-mail
           <input
             type="email"
             placeholder="E-mail"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            defaultValue={user.email}
           />
         </label>
 
-        <label>Password
+        <label>
+          Password
           <input
             type="password"
             placeholder="Password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            defaultValue={user.password}
           />
         </label>
-<label> Are you a musician?   </label>
-           
+        {/* <label> Are you a musician? </label> */}
+
+        {/* <div className={styles.radio}>
+          <input
+            type="radio"
+            name="isMusician"
+            defaultValue={user.isMusician}
+          />
+          Yes
+        </div>
         <div className={styles.radio}>
           <input
             type="radio"
             name="isMusician"
-            value={isMusician}
-            onChange={(e) => setIsMusician(e.target.value)}
-          />Yes
-        </div>
-        <div className={styles.radio}>
-        <input
-            type="radio"
-            name="isMusician"
-            value={isMusician}
-            onChange={(e) => setIsMusician(e.target.value)}
-          />No
-        </div>
+            defaultValue={user.isMusician}
+          />
+          No
+        </div> */}
 
-        <input type="submit" onClick={handleSubmit} value="Sign Up" />
+        <input type="submit" value="Sign Up" />
       </form>
-      <footer>
-This is a footer
-      </footer>
+      <footer>This is a footer</footer>
     </>
   );
 }

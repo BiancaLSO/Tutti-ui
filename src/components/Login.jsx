@@ -1,0 +1,67 @@
+// import { useState } from "react";
+import styles from "./Signup.module.css";
+
+export default function LogIn() {
+  // const [user, setUser] = useState({});
+
+  // async function handleSubmit(event) {
+  //   event.preventDefault();
+  //   let currentUser = {
+  //     username: event.currentTarget.elements.username.value,
+  //     password: event.currentTarget.elements.password.value,
+  //     // isMusician: event.currentTarget.elements.isMusician.value,
+  //   };
+
+  //   const response = await createUser(currentUser);
+  //   console.log(response);
+  // }
+
+  // async function createUser(user) {
+  //   const response = await fetch("http://localhost:3000/signup", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     mode: "cors",
+  //     body: JSON.stringify(user),
+  //   });
+
+  //   const res = await response.json();
+  //   setUser((user) => ({
+  //     ...user,
+  //     ...res,
+  //   }));
+  //   return res;
+  // }
+
+  return (
+    <>
+      <nav>This is a navigation</nav>
+      <h2>Log In</h2>
+      <form className={styles}>
+        <label>
+          Username
+          <input
+            type="text"
+            placeholder="Username"
+            name="username"
+            // defaultValue={user.username}
+          />
+        </label>
+
+        <label>
+          Password
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            // defaultValue={user.password}
+          />
+        </label>
+
+        <input type="submit" value="Log In" />
+      </form>
+      <footer>This is a footer</footer>
+    </>
+  );
+}
