@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Signup.module.css";
+import  Navigation  from "./shared/Navigation"
 
 export default function SignUp() {
   const [user, setUser] = useState({});
@@ -37,7 +38,7 @@ export default function SignUp() {
 
   return (
     <>
-      <nav>This is a navigation</nav>
+     <Navigation></Navigation>
       <h2>Sign Up</h2>
       <form className={styles} onSubmit={handleSubmit}>
         <label>
