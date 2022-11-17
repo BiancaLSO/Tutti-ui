@@ -24,7 +24,8 @@ return (
     </div>
     <div className={styles.gridRight}>
     <Link to="/home" style={linkStyle} className={styles.buttonHover}>Posts</Link>
-    <Link to="/musician" style={linkStyle} className={styles.buttonHover}>Profile</Link>
+    <Link to="/musician" style={linkStyle} className={styles.buttonHover}>Musician Profile</Link>
+    <Link to="/ensemble" style={linkStyle} className={styles.buttonHover}>Ensemble Profile</Link>
     <button className={styles.buttonBlue}>
     <Link to="/signup" style={linkStyleWhite}>Create Account</Link>
     </button>

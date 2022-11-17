@@ -1,3 +1,9 @@
+import  Navigation  from "./shared/Navigation"
+
 export default function Home() {
-  return <div>Home page for Posts</div>;
+  return (
+    <>
+    <Navigation></Navigation>
+    </>
+  )
 }
