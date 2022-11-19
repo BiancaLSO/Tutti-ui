@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Signup.module.css";
 import  Navigation  from "./shared/Navigation"
+import Footer from "./shared/Footer";
 
 export default function SignUp() {
   const [user, setUser] = useState({});
@@ -91,7 +92,7 @@ export default function SignUp() {
 
         <input type="submit" value="Sign Up" />
       </form>
-      <footer>This is a footer</footer>
+      <Footer></Footer>
     </>
   );
 }

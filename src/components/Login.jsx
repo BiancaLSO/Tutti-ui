@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import styles from "./Signup.module.css";
 import  Navigation  from "./shared/Navigation"
+import Footer from "./shared/Footer";
 
 export default function LogIn() {
   // const [user, setUser] = useState({});
@@ -62,7 +63,7 @@ export default function LogIn() {
 
         <input type="submit" value="Log In" />
       </form>
-      <footer>This is a footer</footer>
+<Footer></Footer>
     </>
   );
 }
