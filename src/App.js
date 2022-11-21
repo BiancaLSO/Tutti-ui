@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import MusicianProfile from "./components/MusicianProfile";
 import EnsembleProfile from "./components/EnsembleProfile";
 import Home from "./components/Home";
+// import {Footer} from "./components/Footer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/musician" element={<MusicianProfile />} />
       <Route path="/ensemble" element={<EnsembleProfile />} />
       <Route path="/home" element={<Home />} />
+      {/* <Route path="/footer" element={<Footer />} /> */}
     </Routes>
   );
 }
