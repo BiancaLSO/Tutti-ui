@@ -1,17 +1,21 @@
 /* general form style */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+/* *{
+    font-family: 'Montserrat', sans-serif;
+} */
 form{
     display: flex;
     flex-direction: column;
-    row-gap: .5rem;
+    row-gap: .3rem;
     justify-content: center;
     padding: 3vw 4vw;
     height: auto;
     left: 50%;
-    top: 50%;
+    top: 55%;
     position  : absolute;
     transform : translate(-50%, -50%);
     background-color: #f9f9f9;
+    font-family: 'Montserrat', sans-serif;
 }
 input, label {
     display:block;

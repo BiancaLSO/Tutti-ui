@@ -41,6 +41,7 @@ h1{
     font-size: .9rem;
     filter: drop-shadow(0 2px 4px #00000029);
     font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .buttonWhite{
@@ -56,6 +57,7 @@ h1{
     font-size: .9rem;
     filter: drop-shadow(0 2px 4px #00000014);
     font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .buttonHover:hover{
