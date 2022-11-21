@@ -2,60 +2,67 @@ import styles from "./Footer.module.css";
 import React from "react";
 import './Footer.module.css';
 import { FaInstagramSquare, FaFacebookSquare, FaLinkedin } from "react-icons/fa";
-// import logo from './note-logo.svg';
-// import logo from './daos-logo.png';
+
 
 function Footer(){
 
     return (
     <footer className={styles}>
+    <div className="footer">
     <div className={styles.container}>
-    <div className = {styles.columnOne}></div>
-    <div className = {styles.columnTwo}></div>
-    <div className = {styles.columnThree}></div>
-    <section className="footer">
+    <div className="row">
+        {/* Column One */}
+    <div className = {styles.columnOne}>
         <h3>MUSIK SAMSPIL</h3>
-        <div className="footer-links">
-        <div className="footer-link-wrapper">
-        <div className="footer-link-items">
-            <span style={{ marginLeft: "40px" }}>
-             <a href="/">Se opslag</a> 
-             </span> 
-             <span style={{ marginLeft: "10px" }}>
-             <a href="/">Profil</a>
-            </span>
-        </div>
-        </div>
-        </div>
-        <br />
-        <section className="social-media">
-        <div className="social-media-wrap">
-        <div className="social-media-logo">
-                <span style={{ marginLeft: "40px" }}>
-                    <FaInstagramSquare  className="instagram"/>
-                </span>
+            <div className="footer-links">
+            <div className="footer-link-wrapper">
+            <div className="footer-link-items">
+                <span style={{ marginLeft: "70px" }}>
+                <a href="/">Se opslag</a> 
+                </span> 
                 <span style={{ marginLeft: "10px" }}>
-                    <FaFacebookSquare className="facebook"/>
+                <a href="/">Profil</a>
                 </span>
-                <span style={{ marginLeft: "10px" }}>
-                    <FaLinkedin className="linkedin"/>
-                </span>
+            </div>
+            </div>
+            </div>
+            <br />
+     <section className="social-media">
+            <div className="social-media-wrap">
+            <div className="social-media-logo">
+                    <span style={{ marginLeft: "70px" }}>
+                        <FaInstagramSquare  className="instagram"/>
+                    </span>
+                    <span style={{ marginLeft: "10px" }}>
+                        <FaFacebookSquare className="facebook"/>
+                    </span>
+                    <span style={{ marginLeft: "10px" }}>
+                        <FaLinkedin className="linkedin"/>
+                    </span>
+            </div>
+            </div>
+    </section>
         </div>
-        </div>
-        </section>
-        </section>
+        {/* Column Two */}
+    <div className = {styles.columnTwo}>
         <section className="image-middle-row">
-        <section className="notes-image">
-            <img src="/images/note.svg" alt="notes" />
+            <section className="notes-image">
+                <img src="/images/note.svg" alt="notes" />
         </section>
         </section>
+    </div>
+    {/* Column Three */}
+    <div className = {styles.columnThree}>
         <section className="logo-right-row">
         <section className="logo">
-            <img src="/images/daos-logo.png" alt="Logo" />
+            <img src="/images/Daos.png" alt="Logo" height={140} width={280} />
         </section>
         </section>
-        </div>
-        </footer>
+    </div>
+    </div>
+    </div>
+    </div>
+    </footer>
     )
 }
 
