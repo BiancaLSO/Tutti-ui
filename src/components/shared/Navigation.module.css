@@ -6,6 +6,7 @@ nav{
 }
 .gridLeft{
     margin-left: 1rem;
+  
 }
 p{
     margin-top: -1.5rem;
@@ -25,6 +26,7 @@ h1{
     column-gap: 1rem;
     justify-content:right;
     margin: 1rem;
+    font-size: .8rem;
 }
 
 .buttonBlue{
@@ -36,9 +38,8 @@ h1{
     text-align: center;
     text-decoration: none; 
     display: inline-block;
-    font-size: 1rem;
+    font-size: .9rem;
     filter: drop-shadow(0 2px 4px #00000029);
-    font-size: 19px;
     font-weight: 700;
 }
 
@@ -52,9 +53,8 @@ h1{
     text-align: center;
     text-decoration: none; 
     display: inline-block;
-    font-size: 1rem;
+    font-size: .9rem;
     filter: drop-shadow(0 2px 4px #00000014);
-    font-size: 19px;
     font-weight: 700;
 }
 
