@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Signup.module.css";
-import  Navigation  from "./shared/Navigation"
+import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
 
 export default function SignUp() {
@@ -12,7 +12,6 @@ export default function SignUp() {
       username: event.currentTarget.elements.username.value,
       email: event.currentTarget.elements.email.value,
       password: event.currentTarget.elements.password.value,
-      // isMusician: event.currentTarget.elements.isMusician.value,
     };
 
     const response = await createUser(currentUser);
@@ -39,7 +38,7 @@ export default function SignUp() {
 
   return (
     <>
-     <Navigation></Navigation>
+      <Navigation></Navigation>
       <h2>Sign Up</h2>
       <form className={styles} onSubmit={handleSubmit}>
         <label>
@@ -71,24 +70,6 @@ export default function SignUp() {
             defaultValue={user.password}
           />
         </label>
-        {/* <label> Are you a musician? </label> */}
-
-        {/* <div className={styles.radio}>
-          <input
-            type="radio"
-            name="isMusician"
-            defaultValue={user.isMusician}
-          />
-          Yes
-        </div>
-        <div className={styles.radio}>
-          <input
-            type="radio"
-            name="isMusician"
-            defaultValue={user.isMusician}
-          />
-          No
-        </div> */}
 
         <input type="submit" value="Sign Up" />
       </form>
