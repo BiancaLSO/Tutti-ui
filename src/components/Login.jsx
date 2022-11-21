@@ -1,53 +1,59 @@
-// import { useState } from "react";
 import styles from "./Signup.module.css";
-import  Navigation  from "./shared/Navigation"
+import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
-  // const [user, setUser] = useState({});
+  const navigate = useNavigate();
 
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-  //   let currentUser = {
-  //     username: event.currentTarget.elements.username.value,
-  //     password: event.currentTarget.elements.password.value,
-  //     // isMusician: event.currentTarget.elements.isMusician.value,
-  //   };
+  const [credentials, setCredentials] = useState("");
 
-  //   const response = await createUser(currentUser);
-  //   console.log(response);
-  // }
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    let credentials = {
+      username: event.currentTarget.elements.username.value,
+      password: event.currentTarget.elements.password.value,
+    };
 
-  // async function createUser(user) {
-  //   const response = await fetch("http://localhost:3000/signup", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     mode: "cors",
-  //     body: JSON.stringify(user),
-  //   });
+    const token = await loginUser(credentials);
+    const tokenValue = token.access_token;
 
-  //   const res = await response.json();
-  //   setUser((user) => ({
-  //     ...user,
-  //     ...res,
-  //   }));
-  //   return res;
-  // }
+    localStorage.setItem("token", JSON.stringify(tokenValue));
+
+    setCredentials(" ");
+
+    if (token) {
+      setTimeout(navigate("/home"), 3000);
+    }
+  };
+
+  async function loginUser(credentials) {
+    const result = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify(credentials),
+    });
+
+    const res = await result.json();
+    return res;
+  }
 
   return (
     <>
-        <Navigation></Navigation>
+      <Navigation></Navigation>
       <h2>Log In</h2>
-      <form className={styles}>
+      <form className={styles} onSubmit={handleLogin}>
         <label>
           Username
           <input
             type="text"
             placeholder="Username"
             name="username"
-            // defaultValue={user.username}
+            defaultValue={credentials.username}
           />
         </label>
 
@@ -57,13 +63,13 @@ export default function LogIn() {
             type="password"
             placeholder="Password"
             name="password"
-            // defaultValue={user.password}
+            defaultValue={credentials.password}
           />
         </label>
 
         <input type="submit" value="Log In" />
       </form>
-<Footer></Footer>
+      <Footer></Footer>
     </>
   );
 }
