@@ -4,11 +4,11 @@ import './Footer.module.css';
 import { FaInstagramSquare, FaFacebookSquare, FaLinkedin } from "react-icons/fa";
 
 
-function Footer(){
+  function Footer(){
 
     return (
     <footer className={styles}>
-    <div className="footer">
+
     <div className={styles.container}>
     <div className="row">
         {/* Column One */}
@@ -58,7 +58,6 @@ function Footer(){
             <img src="/images/Daos.png" alt="Logo" height={140} width={280} />
         </section>
         </section>
-    </div>
     </div>
     </div>
     </div>

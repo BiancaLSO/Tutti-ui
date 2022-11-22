@@ -92,9 +92,9 @@ export default function SignUp() {
 
         <input type="submit" value="Sign Up" />
       </form>
-      <Footer>
+      {/* <Footer>
         
-      </Footer>
+      </Footer> */}
     </>
   );
 }

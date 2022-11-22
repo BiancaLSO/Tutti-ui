@@ -1,5 +1,6 @@
 import styles from "./Signup.module.css";
 import  Navigation  from "./shared/Navigation"
+import Footer from "./shared/Footer";
 
 export default function MusicianProfile() {
   return (
@@ -59,7 +60,7 @@ export default function MusicianProfile() {
 
         <input type="submit" value="Create Profile" />
       </form>
-      <footer>This is a footer</footer>
+     {/* <Footer></Footer> */}
     </>
   )
 
