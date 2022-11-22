@@ -69,7 +69,7 @@ export default function LogIn() {
 
         <input type="submit" value="Log In" />
       </form>
-      <Footer></Footer>
+{/* <Footer></Footer> */}
     </>
   );
 }
