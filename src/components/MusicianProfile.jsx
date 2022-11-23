@@ -60,7 +60,7 @@ export default function MusicianProfile() {
 
         <input type="submit" value="Create Profile" />
       </form>
-     {/* <Footer></Footer> */}
+     <Footer></Footer>
     </>
   )
 

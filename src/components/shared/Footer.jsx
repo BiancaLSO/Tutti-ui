@@ -10,8 +10,8 @@ import {
 function Footer() {
   return (
     <footer className={styles}>
-      <div className={styles.container}>
-        <div className="row">
+     
+ 
           {/* Column One */}
           <div className={styles.columnOne}>
             <h3>MUSIK SAMSPIL</h3>
@@ -65,8 +65,7 @@ function Footer() {
               </section>
             </section>
           </div>
-        </div>
-      </div>
+
     </footer>
   );
 }

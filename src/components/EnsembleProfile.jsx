@@ -2,10 +2,12 @@ import styles from "./Signup.module.css";
 import  Navigation  from "./shared/Navigation"
 import Footer from "./shared/Footer";
 
+
 export default function EnsembleProfile() {
   return (
     <>
-     <Navigation></Navigation>
+ <Navigation></Navigation>
+
       {/* <h2 st>Create a profile</h2> */}
       <form className={styles}>
         <label>
@@ -73,7 +75,8 @@ export default function EnsembleProfile() {
         </label>
         <input type="submit" value="Create Profile" />
       </form>
-      {/* <Footer></Footer> */}
+
+      <Footer></Footer>
     </>
   )
 

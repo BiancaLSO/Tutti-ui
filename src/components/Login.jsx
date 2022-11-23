@@ -45,7 +45,6 @@ export default function LogIn() {
   return (
     <>
       <Navigation></Navigation>
-      <h2>Log In</h2>
       <form className={styles} onSubmit={handleLogin}>
         <label>
           Username
@@ -69,7 +68,7 @@ export default function LogIn() {
 
         <input type="submit" value="Log In" />
       </form>
-{/* <Footer></Footer> */}
+<Footer></Footer>
     </>
   );
 }

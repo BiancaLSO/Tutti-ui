@@ -39,7 +39,7 @@ export default function SignUp() {
   return (
     <>
       <Navigation></Navigation>
-      <h2>Sign Up</h2>
+
       <form className={styles} onSubmit={handleSubmit}>
         <label>
           Username
@@ -73,9 +73,10 @@ export default function SignUp() {
 
         <input type="submit" value="Sign Up" />
       </form>
-      {/* <Footer>
+
+      <Footer>
         
-      </Footer> */}
+      </Footer>
     </>
   );
 }
