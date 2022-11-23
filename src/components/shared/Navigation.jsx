@@ -1,12 +1,13 @@
-import { Component } from "react"
 import styles from "./Navigation.module.css"
 
-export default class Navbar extends Component {
-state = { clicked: false };
-handleClick = () => {
-this.setState({clicked: !this.state.clicked })
-}
-render() {
+export default function Navigation() {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    navigate("/auth/login");
+    localStorage.clear();
+  };
+
   return (
    <nav className={styles.navbar}>
     <div className={styles.gridLeft}>
@@ -26,11 +27,12 @@ render() {
          </li>
  <li><a href="/signup">Create Account</a></li>
 <li><a href="/auth/login">Log In</a></li>
+<li onClick={logout}><a href="/auth/login">Log Out</a></li>
        </div>
      </ul>
 
     </nav>
 
   );
-}
+
 }
