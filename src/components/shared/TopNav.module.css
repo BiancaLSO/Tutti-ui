@@ -42,7 +42,6 @@ h1{
    }
    .navLinks a {
     color: #353A5D;
-    font-family: 'Montserrat', sans-serif;
    }
    /* NAVBAR MENU */
    .menu {
@@ -125,7 +124,6 @@ h1{
    }
    input[type=checkbox]:checked ~ .menu{
     display: block;
-    height: 100vh;
    }
    .hamburger {
     display: block;
