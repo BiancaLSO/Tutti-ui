@@ -4,15 +4,11 @@ footer{
   display:  grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: center;
-  /* flex: 0 0 90px;
-  margin-top: auto;
-  margin-bottom: 0 !important; */
   clear: both;
   position: relative;
   height: 200px;
   margin-top: -200px;
   width: 100vw;
-  /* height: 15rem; */
   background-color: #BF1E2E; 
   text-align: center;
   padding: 10px 10px 10px 10px;
