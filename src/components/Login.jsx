@@ -24,7 +24,7 @@ export default function LogIn() {
     setCredentials(" ");
 
     if (token) {
-      setTimeout(navigate("/home"), 3000);
+      setTimeout(navigate("/home"), 4000);
     }
   };
 
@@ -68,7 +68,7 @@ export default function LogIn() {
 
         <input type="submit" value="Log In" />
       </form>
-<Footer></Footer>
+      <Footer></Footer>
     </>
   );
 }

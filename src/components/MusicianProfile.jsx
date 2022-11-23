@@ -1,20 +1,83 @@
 import styles from "./Signup.module.css";
-import  Navigation  from "./shared/Navigation"
+import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
+import { useState } from "react";
 
 export default function MusicianProfile() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [instrument, setInstrument] = useState("");
+  const [description, setDescription] = useState("");
+  const [ensmebles] = useState([]);
+  const [posts] = useState([]);
+
+  const onNameChange = (e) => setFullName(e.target.value);
+  const onEmailChange = (e) => setEmail(e.target.value);
+  const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
+  const onInstrumentChange = (e) => setInstrument(e.target.value);
+  const onDescriptionChange = (e) => setDescription(e.target.value);
+
+  const getToken = () => {
+    return localStorage.getItem("token");
+  };
+
+  const clearForm = () => {
+    setFullName("");
+    setEmail("");
+    setPhoneNo("");
+    setInstrument("");
+    setDescription("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const tokenFromStorage = getToken();
+    console.log(tokenFromStorage);
+
+    const data = {
+      fullName,
+      email,
+      phoneNo,
+      instrument,
+      description,
+      ensmebles,
+      posts,
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenFromStorage}`,
+      },
+      mode: "cors",
+      body: JSON.stringify(data),
+    };
+
+    // Check if token beares gets passed in headers
+    console.log(requestOptions);
+
+    fetch("http://localhost:3000/musicians", requestOptions)
+      .then((response) => response.json())
+      .then((res) => console.log(res));
+
+    clearForm();
+  };
+
   return (
     <>
-     <Navigation></Navigation>
+      <Navigation></Navigation>
       {/* <h2 st>Create a profile</h2> */}
-      <form className={styles}>
+      <form className={styles} onSubmit={handleSubmit}>
         <label>
-          Name
+          Full Name
           <input
             type="text"
-            placeholder="Name"
+            placeholder=" Full name"
             name="name"
-
+            value={fullName}
+            onChange={onNameChange}
           />
         </label>
 
@@ -24,7 +87,8 @@ export default function MusicianProfile() {
             type="email"
             placeholder="E-mail"
             name="email"
-
+            value={email}
+            onChange={onEmailChange}
           />
         </label>
 
@@ -34,6 +98,8 @@ export default function MusicianProfile() {
             type="number"
             placeholder="Phone Number"
             name="number"
+            value={phoneNo}
+            onChange={onPhoneNoChange}
           />
         </label>
 
@@ -41,27 +107,27 @@ export default function MusicianProfile() {
           Instruments
           <input
             type="text"
-            placeholder="Instruments"
-            name="instruments"
+            placeholder="Instrument"
+            name="instrument"
+            value={instrument}
+            onChange={onInstrumentChange}
           />
         </label>
 
         <label>
-         Description
+          Description
           <textarea
             placeholder="Description"
-            name="description" 
+            name="description"
+            value={description}
+            onChange={onDescriptionChange}
           />
         </label>
-        <label>
-         Ensembles
-    
-        </label>
+        <label>Ensembles</label>
 
         <input type="submit" value="Create Profile" />
       </form>
-     <Footer></Footer>
+      <Footer></Footer>
     </>
-  )
-
+  );
 }
