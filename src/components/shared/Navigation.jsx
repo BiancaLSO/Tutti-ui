@@ -1,4 +1,6 @@
 import styles from "./Navigation.module.css"
+import { useNavigate } from "react-router-dom";
+
 
 export default function Navigation() {
   const navigate = useNavigate();
