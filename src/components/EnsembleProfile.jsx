@@ -74,6 +74,7 @@ export default function EnsembleProfile() {
     <>
       <Navigation></Navigation>
       {/* <h2 st>Create a profile</h2> */}
+      <div className={styles.center}>
       <form className={styles} onSubmit={handleSubmit}>
         <label>
           Name of the Ensemble
@@ -152,7 +153,7 @@ export default function EnsembleProfile() {
         </label>
         <input type="submit" value="Create Profile" />
       </form>
-
+      </div>
       <Footer></Footer>
     </>
   );

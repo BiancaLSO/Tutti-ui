@@ -4,21 +4,22 @@ footer{
   display:  grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: center;
-  position:fixed;
-  bottom:0;
-  left:0;
+  /* flex: 0 0 90px;
+  margin-top: auto;
+  margin-bottom: 0 !important; */
+  clear: both;
+  position: relative;
+  height: 200px;
+  margin-top: -200px;
   width: 100vw;
+  /* height: 15rem; */
   background-color: #BF1E2E; 
   text-align: center;
   padding: 10px 10px 10px 10px;
   
 }
 
-/* Column One */
 .columnOne{
-  /* display: flex;
-  flex-direction: column; */
-  /* margin-top: 40px; */
   font-size: 24px;
   color: #FFFFFF;
   align-self: center;
@@ -40,44 +41,27 @@ a {
   display: inline;
   cursor: pointer;
   position: relative;
-  /* font-family: Oswald; */
 
 }
 
-
-
-/* Column two */
-.columnTwo{
+.columnTwo, .columnThree{
   align-self: center;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  /* margin-top: -100px; */
-}
-
-
-/* Column Three */
-.columnThree{
-  align-self: center;
-  /* display: flex;
-  flex-direction: column; */
-  /* margin-left: 1080px;
-  margin-top: -110px; */
 }
 
 .columnThree img {
-  width: 30%;
-  height: 30%;
+  width: 50%;
+  height: 50%;
 }
 
 @media (max-width: 50rem){
 footer{
   grid-template-columns: 1fr;
+  height: auto;
 }
 
 .columnThree img{
-width: 100%;
-height: 100%;
+width: 70%;
+height: 70%;
 }
 
 }
