@@ -33,7 +33,7 @@ export default function MusicianProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const tokenFromStorage = getToken();
+    const tokenFromStorage = getToken().replace(/^"(.*)"$/, '$1');
     console.log(tokenFromStorage);
 
     const data = {
