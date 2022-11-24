@@ -124,7 +124,6 @@ export default function MusicianProfile() {
             onChange={onDescriptionChange}
           />
         </label>
-        <label>Ensembles</label>
 
         <input type="submit" value="Create Profile" />
       </form>

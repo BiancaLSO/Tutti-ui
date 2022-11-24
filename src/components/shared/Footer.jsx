@@ -48,7 +48,7 @@ function Footer() {
           <div className={styles.columnTwo}>
             <section className="image-middle-row">
               <section className="notes-image">
-                <img src="/images/note.svg" alt="notes" />
+                <img src="/assets/note.svg" alt="notes" />
               </section>
             </section>
           </div>
@@ -57,7 +57,7 @@ function Footer() {
             <section className="logo-right-row">
               <section className="logo">
                 <img
-                  src="/images/Daos.png"
+                  src="/assets/Daos.png"
                   alt="Logo"
                   height={140}
                   width={280}

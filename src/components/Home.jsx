@@ -1,6 +1,9 @@
+
+import styles from "./Home.module.css"
 import Footer from "./shared/Footer";
 import Navigation from "./shared/Navigation";
 import { useState, useEffect } from "react";
+import PostCard from "./shared/PostCrad";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -39,19 +42,19 @@ export default function Home() {
   return (
     <>
       <Navigation></Navigation>
-      {posts.map((post, index) => {
-        return (
-          <div key={index}>
-            {/* <h2>{post.id}</h2> */}
-            <h2>{post.title}</h2>
-            <h2>{post.description}</h2>
-            <h2>{post.instrument}</h2>
-            <h2>{post.genre}</h2>
-            <h2>{post.location}</h2>
-            <hr />
+      <div className={styles.landing}>
+          <p className={styles.headline}>
+          Stedet hvor amatørmusikere finder hinanden og spiller musik sammen
+          </p>
+          
+          <img src = "./assets/landing-img.png" className={styles.picLand}></img>
+          
           </div>
-        );
-      })}
+          <div className={styles.cards}>
+  <PostCard></PostCard>
+  </div>
+
+  <Footer></Footer>
     </>
   );
 }
