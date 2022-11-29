@@ -23,10 +23,10 @@ export default function Navigation() {
 
        <div className={styles.menu}>
          <li><a href="/home">Posts</a></li>
-         <li><a href="/musician">Musician Profile</a></li>
-         <li className={styles.services}>
+         <li><a href="/musician">Profile</a></li>
+         {/* <li className={styles.services}>
            <a href="/ensemble">Ensemble Profile</a>
-         </li>
+         </li> */}
  <li><a href="/signup">Create Account</a></li>
 <li><a href="/auth/login">Log In</a></li>
 <li onClick={logout}><a href="/auth/login">Log Out</a></li>

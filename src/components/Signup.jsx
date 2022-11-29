@@ -4,37 +4,66 @@ import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
 
 export default function SignUp() {
-  const [user, setUser] = useState({});
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [instrument, setInstrument] = useState("");
+  const [description, setDescription] = useState("");
+  const [ensmebles] = useState([]);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    let currentUser = {
-      username: event.currentTarget.elements.username.value,
-      email: event.currentTarget.elements.email.value,
-      password: event.currentTarget.elements.password.value,
+  const onUsernameChange = (e) => setUsername(e.target.value);
+  const onEmailChange = (e) => setEmail(e.target.value);
+  const onPasswordChange = (e) => setPassword(e.target.value);
+  const onNameChange = (e) => setFullName(e.target.value);
+  const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
+  const onInstrumentChange = (e) => setInstrument(e.target.value);
+  const onDescriptionChange = (e) => setDescription(e.target.value);
+
+
+
+  const clearForm = () => {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setFullName("");
+    setPhoneNo("");
+    setInstrument("");
+    setDescription("");
+  };
+
+
+   function handleSubmit(e) {
+    e.preventDefault();
+    const data = {
+      username,
+      email,
+      password,
+      fullName,
+      phoneNo,
+      instrument,
+      description,
+      ensmebles,
     };
 
-    const response = await createUser(currentUser);
-    console.log(response);
-  }
 
-  async function createUser(user) {
-    const response = await fetch("http://localhost:3000/signup", {
+    const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       mode: "cors",
-      body: JSON.stringify(user),
-    });
+      body: JSON.stringify(data),
+    };
 
-    const res = await response.json();
-    setUser((user) => ({
-      ...user,
-      ...res,
-    }));
-    return res;
-  }
+    fetch("http://localhost:3000/profile/signup", requestOptions)
+    .then((response) => response.json())
+    .then((res) => console.log(res));
+
+  clearForm();
+  
+  };
 
   return (
     <>
@@ -47,7 +76,8 @@ export default function SignUp() {
             type="text"
             placeholder="Username"
             name="username"
-            defaultValue={user.username}
+            value={username}
+            onChange={onUsernameChange}
           />
         </label>
 
@@ -57,7 +87,8 @@ export default function SignUp() {
             type="email"
             placeholder="E-mail"
             name="email"
-            defaultValue={user.email}
+            value={email}
+            onChange={onEmailChange}
           />
         </label>
 
@@ -67,7 +98,53 @@ export default function SignUp() {
             type="password"
             placeholder="Password"
             name="password"
-            defaultValue={user.password}
+            value={password}
+            onChange={onPasswordChange}
+          />
+        </label>
+
+        <label>
+          Full Name
+          <input
+            type="text"
+            placeholder=" Full name"
+            name="name"
+            value={fullName}
+            onChange={onNameChange}
+          />
+        </label>
+
+       
+
+        <label>
+          Phone Number
+          <input
+            type="number"
+            placeholder="Phone Number"
+            name="number"
+            value={phoneNo}
+            onChange={onPhoneNoChange}
+          />
+        </label>
+
+        <label>
+          Instrument
+          <input
+            type="text"
+            placeholder="Instrument"
+            name="instrument"
+            value={instrument}
+            onChange={onInstrumentChange}
+          />
+        </label>
+
+        <label>
+          Description
+          <textarea
+            placeholder="Description"
+            name="description"
+            value={description}
+            onChange={onDescriptionChange}
           />
         </label>
 

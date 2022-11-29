@@ -8,7 +8,7 @@ const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:3000/home")
+    fetch("http://localhost:3000/ensembles")
       .then((response) => {
         return response.json();
       })
@@ -45,12 +45,12 @@ const [posts, setPosts] = useState([]);
             <div className={style.card}>
               <div key={index}>
                 {/* <h2>{post.id}</h2> */}
-                <h1 className={style.title}>{post.title}</h1>
+                <h1 className={style.title}>{post.name}</h1>
                 <p className={style.desc}>{post.description}</p>
-                <p> <b>&#127925; {post.instrument}</b></p>
+                <p> <b>&#127925; {post.activeMusicians}</b></p>
                 <div className={style.spans}>
-                <span> {post.genre}</span>
-                <span> 📍 {post.location}</span>
+                <span> {post.practiceFrequency}</span>
+                <span> 📍 {post.genre}</span>
                 </div>
               </div>
               </div>
