@@ -8,7 +8,7 @@
     filter: drop-shadow(0 2px 4px #00000014);
     transition: 0.3s;
     width: 420px;
-    height: 252px;
+    height: 320px;
     padding: 20px;
 
 }
@@ -37,3 +37,31 @@ padding: 10px;
     background-color: #F9F9F9;
     color: #777777;
 }
+
+.join{
+    margin-top: 15px;
+    transition-duration: 0.4s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.join button{
+    background-color: #BF1E2E;
+    border: none;
+    padding: 15px 32px;
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: sans-serif;
+    transition-duration: 0.4s;
+}
+
+.join:hover {
+    -moz-box-shadow: 0 10px 80px rgba(2, 2, 2, 0.25);
+    -webkit-box-shadow: 0 10px 90px rgba(0, 0, 0, .20);
+    -goog-ms-box-shadow: 0 10px 60px #5c0a0a;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, .15);
+  }
+
+
+
