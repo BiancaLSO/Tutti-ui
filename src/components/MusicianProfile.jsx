@@ -1,26 +1,15 @@
 import styles from "./Signup.module.css";
 import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 export default function MusicianProfile() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [instrument, setInstrument] = useState("");
-  const [description, setDescription] = useState("");
-  const [ensembles] = useState([]);
 
-  const onUsernameChange = (e) => setUsername(e.target.value);
-  const onEmailChange = (e) => setEmail(e.target.value);
-  const onPasswordChange = (e) => setPassword(e.target.value);
-  const onNameChange = (e) => setFullName(e.target.value);
-  const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
-  const onInstrumentChange = (e) => setInstrument(e.target.value);
-  const onDescriptionChange = (e) => setDescription(e.target.value);
+  
+  const [user, setUser] = useState([]);
 
+  
   const getToken = () => {
     return localStorage.getItem("token");
   };
@@ -29,76 +18,59 @@ export default function MusicianProfile() {
     return localStorage.getItem("id");
   };
 
-  const clearForm = () => {
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setFullName("");
-    setPhoneNo("");
-    setInstrument("");
-    setDescription("");
-  };
+  const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
+  const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
 
-    const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
-
-    const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
-
-    const data = {
-      username,
-      email,
-      password,
-      fullName,
-      phoneNo,
-      instrument,
-      description,
-      ensembles,
-    };
-
+  useEffect(() => {
     const requestOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${tokenFromStorage}`,
-      },
-      mode: "cors",
-      body: JSON.stringify(data),
-    };
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenFromStorage}`,
+          },
+          mode: "cors"
+        };
+    fetch("http://localhost:3000/profile/loggedin/" + idFromStorage, requestOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => 
+      setUser(data)
+      );
 
-    fetch("http://localhost:3000/musicians/" + idFromStorage, requestOptions)
-      .then((response) => response.json())
-      .then((res) => console.log(res));
+  }, []);
 
-    clearForm();
-  };
+
+
+
+ 
 
   return (
     <>
       <Navigation></Navigation>
       {/* <h2 st>Create a profile</h2> */}
       <div className={styles.center}>
-        <form className={styles} onSubmit={handleUpdate}>
+     
+        <form className={styles}>
           <label>
             Username
             <input
               type="text"
               placeholder="Username"
               name="username"
-              value={username}
-              onChange={onUsernameChange}
+              value={user.phoneNo}
             />
           </label>
 
-          <label>
+          {/* <label>
             E-mail
             <input
               type="email"
               placeholder="E-mail"
               name="email"
               value={email}
-              onChange={onEmailChange}
+
             />
           </label>
 
@@ -109,7 +81,7 @@ export default function MusicianProfile() {
               placeholder="Password"
               name="password"
               value={password}
-              onChange={onPasswordChange}
+
             />
           </label>
 
@@ -120,7 +92,7 @@ export default function MusicianProfile() {
               placeholder=" Full name"
               name="name"
               value={fullName}
-              onChange={onNameChange}
+
             />
           </label>
 
@@ -131,7 +103,6 @@ export default function MusicianProfile() {
               placeholder="Phone Number"
               name="number"
               value={phoneNo}
-              onChange={onPhoneNoChange}
             />
           </label>
 
@@ -142,7 +113,7 @@ export default function MusicianProfile() {
               placeholder="Instrument"
               name="instrument"
               value={instrument}
-              onChange={onInstrumentChange}
+
             />
           </label>
 
@@ -152,9 +123,9 @@ export default function MusicianProfile() {
               placeholder="Description"
               name="description"
               value={description}
-              onChange={onDescriptionChange}
+
             />
-          </label>
+          </label> */}
 
           <input type="submit" value="Update Profile" />
         </form>
