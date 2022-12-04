@@ -44,7 +44,7 @@ export default function MusicianProfile() {
 
     const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
 
-    const idFromStorage = getId();
+    const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
 
     const data = {
       username,

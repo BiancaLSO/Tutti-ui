@@ -16,15 +16,17 @@ export default function LogIn() {
       password: event.currentTarget.elements.password.value,
     };
 
-    const token = await loginUser(credentials);
-    const tokenValue = token.access_token;
+    const creds = await loginUser(credentials);
+    const idValue = creds.id;
+    const tokenValue = creds.access_token;
 
     localStorage.setItem("token", JSON.stringify(tokenValue));
+    localStorage.setItem("id", JSON.stringify(idValue));
 
     setCredentials(" ");
 
-    if (token) {
-      setTimeout(navigate("/home"), 4000);
+    if (creds) {
+      setTimeout(navigate("/home"), 2000);
     }
   };
 
@@ -46,29 +48,29 @@ export default function LogIn() {
     <>
       <Navigation></Navigation>
       <div className={styles.center}>
-      <form className={styles} onSubmit={handleLogin}>
-        <label>
-          Username
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            defaultValue={credentials.username}
-          />
-        </label>
+        <form className={styles} onSubmit={handleLogin}>
+          <label>
+            Username
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              defaultValue={credentials.username}
+            />
+          </label>
 
-        <label>
-          Password
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            defaultValue={credentials.password}
-          />
-        </label>
+          <label>
+            Password
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              defaultValue={credentials.password}
+            />
+          </label>
 
-        <input type="submit" value="Log In" />
-      </form>
+          <input type="submit" value="Log In" />
+        </form>
       </div>
       <Footer></Footer>
     </>
