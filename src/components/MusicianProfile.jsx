@@ -50,11 +50,11 @@ export default function MusicianProfile() {
     <>
       <Navigation></Navigation>
       {/* <h2 st>Create a profile</h2> */}
+    <h1>Hi, { user.username}!</h1>
       <div className={styles.center}>
-     
         <form className={styles}>
           <label>
-            Username
+            Phone number
             <input
               type="text"
               placeholder="Username"
