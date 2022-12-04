@@ -4,16 +4,19 @@ import Footer from "./shared/Footer";
 import { useState } from "react";
 
 export default function MusicianProfile() {
-  const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [instrument, setInstrument] = useState("");
   const [description, setDescription] = useState("");
-  const [ensmebles] = useState([]);
-  const [posts] = useState([]);
+  const [ensembles] = useState([]);
 
-  const onNameChange = (e) => setFullName(e.target.value);
+  const onUsernameChange = (e) => setUsername(e.target.value);
   const onEmailChange = (e) => setEmail(e.target.value);
+  const onPasswordChange = (e) => setPassword(e.target.value);
+  const onNameChange = (e) => setFullName(e.target.value);
   const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
   const onInstrumentChange = (e) => setInstrument(e.target.value);
   const onDescriptionChange = (e) => setDescription(e.target.value);
@@ -22,31 +25,40 @@ export default function MusicianProfile() {
     return localStorage.getItem("token");
   };
 
+  const getId = () => {
+    return localStorage.getItem("id");
+  };
+
   const clearForm = () => {
-    setFullName("");
+    setUsername("");
     setEmail("");
+    setPassword("");
+    setFullName("");
     setPhoneNo("");
     setInstrument("");
     setDescription("");
   };
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
 
-    const tokenFromStorage = getToken().replace(/^"(.*)"$/, '$1');
-    console.log(tokenFromStorage);
+    const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
+
+    const idFromStorage = getId();
 
     const data = {
-      fullName,
+      username,
       email,
+      password,
+      fullName,
       phoneNo,
       instrument,
       description,
-      ensmebles,
-      posts,
+      ensembles,
     };
+
     const requestOptions = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${tokenFromStorage}`,
@@ -55,10 +67,7 @@ export default function MusicianProfile() {
       body: JSON.stringify(data),
     };
 
-    // Check if token beares gets passed in headers
-    console.log(requestOptions);
-
-    fetch("http://localhost:3000/musicians", requestOptions)
+    fetch("http://localhost:3000/musicians/" + idFromStorage, requestOptions)
       .then((response) => response.json())
       .then((res) => console.log(res));
 
@@ -70,63 +79,85 @@ export default function MusicianProfile() {
       <Navigation></Navigation>
       {/* <h2 st>Create a profile</h2> */}
       <div className={styles.center}>
-      <form className={styles} onSubmit={handleSubmit}>
-        <label>
-          Full Name
-          <input
-            type="text"
-            placeholder=" Full name"
-            name="name"
-            value={fullName}
-            onChange={onNameChange}
-          />
-        </label>
+        <form className={styles} onSubmit={handleUpdate}>
+          <label>
+            Username
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={username}
+              onChange={onUsernameChange}
+            />
+          </label>
 
-        <label>
-          E-mail
-          <input
-            type="email"
-            placeholder="E-mail"
-            name="email"
-            value={email}
-            onChange={onEmailChange}
-          />
-        </label>
+          <label>
+            E-mail
+            <input
+              type="email"
+              placeholder="E-mail"
+              name="email"
+              value={email}
+              onChange={onEmailChange}
+            />
+          </label>
 
-        <label>
-          Phone Number
-          <input
-            type="number"
-            placeholder="Phone Number"
-            name="number"
-            value={phoneNo}
-            onChange={onPhoneNoChange}
-          />
-        </label>
+          <label>
+            Password
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={onPasswordChange}
+            />
+          </label>
 
-        <label>
-          Instruments
-          <input
-            type="text"
-            placeholder="Instrument"
-            name="instrument"
-            value={instrument}
-            onChange={onInstrumentChange}
-          />
-        </label>
+          <label>
+            Full Name
+            <input
+              type="text"
+              placeholder=" Full name"
+              name="name"
+              value={fullName}
+              onChange={onNameChange}
+            />
+          </label>
 
-        <label>
-          Description
-          <textarea
-            placeholder="Description"
-            name="description"
-            value={description}
-            onChange={onDescriptionChange}
-          />
-        </label>
+          <label>
+            Phone Number
+            <input
+              type="number"
+              placeholder="Phone Number"
+              name="number"
+              value={phoneNo}
+              onChange={onPhoneNoChange}
+            />
+          </label>
 
-        <input type="submit" value="Create Profile" />
-      </form>
+          <label>
+            Instruments
+            <input
+              type="text"
+              placeholder="Instrument"
+              name="instrument"
+              value={instrument}
+              onChange={onInstrumentChange}
+            />
+          </label>
+
+          <label>
+            Description
+            <textarea
+              placeholder="Description"
+              name="description"
+              value={description}
+              onChange={onDescriptionChange}
+            />
+          </label>
+
+          <input type="submit" value="Update Profile" />
+        </form>
       </div>
       <Footer></Footer>
     </>
