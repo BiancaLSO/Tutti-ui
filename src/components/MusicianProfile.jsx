@@ -1,4 +1,4 @@
-import styles from "./Signup.module.css";
+import styles from "./Profile.module.css";
 import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
 import { useState, useEffect } from "react";
@@ -50,18 +50,38 @@ export default function MusicianProfile() {
     <>
       <Navigation></Navigation>
       {/* <h2 st>Create a profile</h2> */}
-    <h1>Hi, { user.username}!</h1>
-      <div className={styles.center}>
+    <h1 className={styles.heading}>Hi, { user.username}!</h1>
+    <div className={styles.grid}>
+    <div className={styles.anotherColumn}>
+    <img src = "https://i.pravatar.cc/300"  className={styles.profile}></img>
+    <button className={styles.update}>Update profile</button>
+    </div>
+    <div className={styles.column}>
+      <h3 className={styles.secondHeading}>Basic Information</h3>
+      <div className={styles.info}>Full name: <span className={styles.span}>{ user.username}</span></div>
+      <div className={styles.info}>E-mail: <span className={styles.span}>{ user.email}</span></div>
+      <div className={styles.info}>Phone number: <span className={styles.span}>{ user.phoneNo}</span></div>
+      <div className={styles.info}>Played Instrument: <span className={styles.span}>{ user.instrument}</span></div>
+      <div className={styles.info}>About me: <span className={styles.span}>{ user.description}</span></div>
+      <button className={styles.delete}>Delete profile</button>
+    </div>
+    </div>
+    
+    <div className={styles.gridEnsembles}>
+    <h1 className={styles.heading}>My Ensembles</h1>
+    </div>
+
+      {/* <div className={styles.center}>
         <form className={styles}>
           <label>
             Phone number
             <input
-              type="text"
+              type="text`"
               placeholder="Username"
               name="username"
               value={user.phoneNo}
             />
-          </label>
+          </label> */}
 
           {/* <label>
             E-mail
@@ -127,9 +147,9 @@ export default function MusicianProfile() {
             />
           </label> */}
 
-          <input type="submit" value="Update Profile" />
-        </form>
-      </div>
+          {/* <input type="submit" value="Update Profile" />
+        </form> */}
+      {/* </div> */}
       <Footer></Footer>
     </>
   );
