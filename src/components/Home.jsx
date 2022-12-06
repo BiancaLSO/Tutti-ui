@@ -45,9 +45,15 @@ export default function Home() {
         <p className={styles.headline}>
           Stedet hvor amatørmusikere finder hinanden og spiller musik sammen
         </p>
-
         <img src="./assets/landing-img.png" className={styles.picLand}></img>
       </div>
+      <div>
+        <input placeholder="Enter Post Title" className={styles.searchBar}/>
+       
+       <div className={styles.searchBtn}>
+              <button>Search</button>
+       </div>
+       </div>
       <div className={styles.cards}>
         <PostCard></PostCard>
       </div>
