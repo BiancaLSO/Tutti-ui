@@ -34,7 +34,7 @@ export default function Navigation() {
          {/* <li className={styles.services}>
            <a href="/ensemble">Ensemble Profile</a>
          </li> */}
- <li><a href="/signup">Create Account</a></li>
+ <li style={{display: tokenFromStorage ? 'none' : 'block'}}><a href="/signup">Create Account</a></li>
 <li style={{display: tokenFromStorage ? 'none' : 'block'}}><a href="/auth/login">Log In</a></li>
 <li style={{display: tokenFromStorage ? 'block' : 'none'}} onClick={logout}><a href="/auth/login">Log Out</a></li>
        </div>

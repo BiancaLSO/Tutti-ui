@@ -5,6 +5,7 @@ import Footer from "./shared/Footer";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  localStorage.clear();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
