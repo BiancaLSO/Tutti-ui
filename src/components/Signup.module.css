@@ -22,7 +22,7 @@ form{
     height: 969px !important;
     padding-bottom: 200px;
     font-family: 'Montserrat', sans-serif;
-    /* z-index: -1; */
+    z-index: 999;
 }
 input, label {
     display:block;

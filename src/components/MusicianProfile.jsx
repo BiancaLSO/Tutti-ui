@@ -13,6 +13,8 @@ export default function MusicianProfile() {
   const [isShown, setIsShown] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+
+  // SHOW MODAL CONTACT
   const handleModal = () => {
     setShowModal(true);
   };
@@ -20,12 +22,13 @@ export default function MusicianProfile() {
   const closeModal = () => {
     setShowModal(false);
   };
-
+// HIDE USER INFO AND SHOW FORM
   const handleClick = () => {
     setIsShown(current => !current);
 
   };
 
+// GET LOCALSTORAGE TOKEN
   const getToken = () => {
     return localStorage.getItem("token");
   };
@@ -58,9 +61,66 @@ export default function MusicianProfile() {
   }, []);
 
 
+  // UPDATE FORM FUNCTIONALITY
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [instrument, setInstrument] = useState("");
+  const [description, setDescription] = useState("");
+  const [ensembles] = useState([]);
+
+  const onUsernameChange = (e) => setUsername(e.target.value);
+  const onEmailChange = (e) => setEmail(e.target.value);
+
+  const onNameChange = (e) => setFullName(e.target.value);
+  const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
+  const onInstrumentChange = (e) => setInstrument(e.target.value);
+  const onDescriptionChange = (e) => setDescription(e.target.value);
 
 
- 
+  const clearForm = () => {
+    setUsername("");
+    setEmail("");
+    setFullName("");
+    setPhoneNo("");
+    setInstrument("");
+    setDescription("");
+  };
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
+    const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
+
+    const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
+
+    const data = {
+      username,
+      email,
+      fullName,
+      phoneNo,
+      instrument,
+      description,
+      ensembles,
+    };
+
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenFromStorage}`,
+      },
+      mode: "cors",
+      body: JSON.stringify(data),
+    };
+
+    fetch("http://localhost:3000/musicians/" + idFromStorage, requestOptions)
+      .then((response) => response.json())
+      .then((res) => console.log(res));
+
+    clearForm();
+  };
+
 
   return (
     <>
@@ -101,7 +161,7 @@ export default function MusicianProfile() {
     
       <div className={style.center}>
      
-        <form className={style}>
+        <form className={style} onSubmit={handleUpdate}>
 
         <label>
             Full Name
@@ -110,6 +170,7 @@ export default function MusicianProfile() {
               placeholder=" Full name"
               name="name"
               value={user.fullName}
+              onChange={onNameChange}
 
             />
           </label>
@@ -121,6 +182,7 @@ export default function MusicianProfile() {
               placeholder="Username"
               name="username"
               value={user.username}
+              onChange={onUsernameChange}
             />
           </label>
 
@@ -131,6 +193,7 @@ export default function MusicianProfile() {
               placeholder="E-mail"
               name="email"
               value={user.email}
+              onChange={onEmailChange}
 
             />
           </label>
@@ -154,6 +217,7 @@ export default function MusicianProfile() {
               placeholder="Phone Number"
               name="number"
               value={user.phoneNo}
+              onChange={onPhoneNoChange}
             />
           </label>
 
@@ -164,6 +228,7 @@ export default function MusicianProfile() {
               placeholder="Instrument"
               name="instrument"
               value={user.instrument}
+              onChange={onInstrumentChange}
 
             />
           </label>
@@ -174,6 +239,7 @@ export default function MusicianProfile() {
               placeholder="Description"
               name="description"
               value={user.description}
+              onChange={onDescriptionChange}
 
             />
           </label>
