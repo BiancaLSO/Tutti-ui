@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:3000/home")
+    fetch("http://localhost:3000/ensembles")
       .then((response) => {
         return response.json();
       })

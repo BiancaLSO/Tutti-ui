@@ -60,7 +60,7 @@ export default function SignUp() {
       .then((response) => response.json())
       .then((res) => console.log(res));
 
-    setTimeout(navigate("/auth/login"), 2000);
+    navigate("/auth/login");
     clearForm();
   }
 

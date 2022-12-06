@@ -11,7 +11,14 @@ export default function MusicianProfile() {
   
   const [user, setUser] = useState([]);
   const [isShown, setIsShown] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);  
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [instrument, setInstrument] = useState("");
+  const [description, setDescription] = useState("");
 
 
   // SHOW MODAL CONTACT
@@ -62,31 +69,19 @@ export default function MusicianProfile() {
 
 
   // UPDATE FORM FUNCTIONALITY
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [instrument, setInstrument] = useState("");
-  const [description, setDescription] = useState("");
-  const [ensembles] = useState([]);
+
+
 
   const onUsernameChange = (e) => setUsername(e.target.value);
   const onEmailChange = (e) => setEmail(e.target.value);
-
+  const onPasswordChange = (e) => setEmail(e.target.value);
   const onNameChange = (e) => setFullName(e.target.value);
   const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
   const onInstrumentChange = (e) => setInstrument(e.target.value);
   const onDescriptionChange = (e) => setDescription(e.target.value);
 
 
-  const clearForm = () => {
-    setUsername("");
-    setEmail("");
-    setFullName("");
-    setPhoneNo("");
-    setInstrument("");
-    setDescription("");
-  };
+
   const handleUpdate = (e) => {
     e.preventDefault();
 
@@ -97,11 +92,12 @@ export default function MusicianProfile() {
     const data = {
       username,
       email,
+      password,
       fullName,
       phoneNo,
       instrument,
-      description,
-      ensembles,
+      description
+
     };
 
     const requestOptions = {
@@ -114,11 +110,10 @@ export default function MusicianProfile() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://localhost:3000/musicians/" + idFromStorage, requestOptions)
+    fetch("http://localhost:3000/profile/" + idFromStorage, requestOptions)
       .then((response) => response.json())
       .then((res) => console.log(res));
 
-    clearForm();
   };
 
 
@@ -169,7 +164,7 @@ export default function MusicianProfile() {
               type="text"
               placeholder=" Full name"
               name="name"
-              value={user.fullName}
+              defaultValue={user.fullName}
               onChange={onNameChange}
 
             />
@@ -181,7 +176,7 @@ export default function MusicianProfile() {
               type="text`"
               placeholder="Username"
               name="username"
-              value={user.username}
+              defaultValue={user.username}
               onChange={onUsernameChange}
             />
           </label>
@@ -192,22 +187,23 @@ export default function MusicianProfile() {
               type="email"
               placeholder="E-mail"
               name="email"
-              value={user.email}
+              defaultValue={user.email}
               onChange={onEmailChange}
 
             />
           </label>
 
-          {/* <label>
+          <label>
             Password
             <input
               type="password"
               placeholder="Password"
               name="password"
-              value={user.password}
+              defaultValue={user.password}
+              onChange={onPasswordChange}
 
             />
-          </label> */}
+          </label>
 
 
           <label>
@@ -216,7 +212,7 @@ export default function MusicianProfile() {
               type="number"
               placeholder="Phone Number"
               name="number"
-              value={user.phoneNo}
+              defaultValue={user.phoneNo}
               onChange={onPhoneNoChange}
             />
           </label>
@@ -227,7 +223,7 @@ export default function MusicianProfile() {
               type="text"
               placeholder="Instrument"
               name="instrument"
-              value={user.instrument}
+              defaultValue={user.instrument}
               onChange={onInstrumentChange}
 
             />
@@ -238,7 +234,7 @@ export default function MusicianProfile() {
             <textarea
               placeholder="Description"
               name="description"
-              value={user.description}
+              defaultValue={user.description}
               onChange={onDescriptionChange}
 
             />
