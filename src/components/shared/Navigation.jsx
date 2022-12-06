@@ -1,8 +1,15 @@
 import styles from "./Navigation.module.css"
 import { useNavigate } from "react-router-dom";
 
-
 export default function Navigation() {
+
+  const getToken = () => {
+    return localStorage.getItem("token");
+  };
+
+  const tokenFromStorage = getToken();
+
+
   const navigate = useNavigate();
 
   const logout = () => {
@@ -23,7 +30,7 @@ export default function Navigation() {
 
        <div className={styles.menu}>
          <li><a href="/home">Posts</a></li>
-         <li><a href="/musician">Profile</a></li>
+         <li style={{display: tokenFromStorage ? 'block' : 'none'}} className={styles.profile} ><a href="/musician">Profile</a></li>
          {/* <li className={styles.services}>
            <a href="/ensemble">Ensemble Profile</a>
          </li> */}
