@@ -50,10 +50,10 @@ export default function ShowModal({ showModal, closeModal }) {
 <h2>Contact {user.fullName} </h2>
 
               <div className={styles.phone}>
-                <p> { user.phoneNo}</p>
+                <p className={styles.modalInfo}> { user.phoneNo}</p>
                 </div>
               <div className={styles.mail}>
-                <p>{ user.email}</p>
+                <p className={styles.modalInfo}>{ user.email}</p>
                 
               </div>
              
