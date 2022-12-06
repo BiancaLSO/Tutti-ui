@@ -52,6 +52,9 @@ const [posts, setPosts] = useState([]);
                 <span> {post.practiceFrequency}</span>
                 <span> 📍 {post.genre}</span>
                 </div>
+                <div className={style.join}>
+                <button>Join</button>
+                </div>
               </div>
               </div>
         
