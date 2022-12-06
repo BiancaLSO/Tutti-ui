@@ -35,7 +35,7 @@ export default function Navigation() {
            <a href="/ensemble">Ensemble Profile</a>
          </li> */}
  <li><a href="/signup">Create Account</a></li>
-<li><a href="/auth/login">Log In</a></li>
+<li style={{display: tokenFromStorage ? 'none' : 'block'}}><a href="/auth/login">Log In</a></li>
 <li onClick={logout}><a href="/auth/login">Log Out</a></li>
        </div>
      </ul>
