@@ -2,8 +2,11 @@ import { useState } from "react";
 import styles from "./Signup.module.css";
 import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,8 +24,6 @@ export default function SignUp() {
   const onInstrumentChange = (e) => setInstrument(e.target.value);
   const onDescriptionChange = (e) => setDescription(e.target.value);
 
-
-
   const clearForm = () => {
     setUsername("");
     setEmail("");
@@ -33,8 +34,7 @@ export default function SignUp() {
     setDescription("");
   };
 
-
-   function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     const data = {
       username,
@@ -47,7 +47,6 @@ export default function SignUp() {
       ensmebles,
     };
 
-
     const requestOptions = {
       method: "POST",
       headers: {
@@ -58,102 +57,98 @@ export default function SignUp() {
     };
 
     fetch("http://localhost:3000/profile/signup", requestOptions)
-    .then((response) => response.json())
-    .then((res) => console.log(res));
+      .then((response) => response.json())
+      .then((res) => console.log(res));
 
-  clearForm();
-  
-  };
+    setTimeout(navigate("/auth/login"), 2000);
+    clearForm();
+  }
 
   return (
     <>
       <Navigation></Navigation>
       <div className={styles.center}>
-      <form className={styles} onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            value={username}
-            onChange={onUsernameChange}
-          />
-        </label>
+        <form className={styles} onSubmit={handleSubmit}>
+          <label>
+            Username
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={username}
+              onChange={onUsernameChange}
+            />
+          </label>
 
-        <label>
-          E-mail
-          <input
-            type="email"
-            placeholder="E-mail"
-            name="email"
-            value={email}
-            onChange={onEmailChange}
-          />
-        </label>
+          <label>
+            E-mail
+            <input
+              type="email"
+              placeholder="E-mail"
+              name="email"
+              value={email}
+              onChange={onEmailChange}
+            />
+          </label>
 
-        <label>
-          Password
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={onPasswordChange}
-          />
-        </label>
+          <label>
+            Password
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={onPasswordChange}
+            />
+          </label>
 
-        <label>
-          Full Name
-          <input
-            type="text"
-            placeholder=" Full name"
-            name="name"
-            value={fullName}
-            onChange={onNameChange}
-          />
-        </label>
+          <label>
+            Full Name
+            <input
+              type="text"
+              placeholder=" Full name"
+              name="name"
+              value={fullName}
+              onChange={onNameChange}
+            />
+          </label>
 
-       
+          <label>
+            Phone Number
+            <input
+              type="number"
+              placeholder="Phone Number"
+              name="number"
+              value={phoneNo}
+              onChange={onPhoneNoChange}
+            />
+          </label>
 
-        <label>
-          Phone Number
-          <input
-            type="number"
-            placeholder="Phone Number"
-            name="number"
-            value={phoneNo}
-            onChange={onPhoneNoChange}
-          />
-        </label>
+          <label>
+            Instrument
+            <input
+              type="text"
+              placeholder="Instrument"
+              name="instrument"
+              value={instrument}
+              onChange={onInstrumentChange}
+            />
+          </label>
 
-        <label>
-          Instrument
-          <input
-            type="text"
-            placeholder="Instrument"
-            name="instrument"
-            value={instrument}
-            onChange={onInstrumentChange}
-          />
-        </label>
+          <label>
+            Description
+            <textarea
+              placeholder="Description"
+              name="description"
+              value={description}
+              onChange={onDescriptionChange}
+            />
+          </label>
 
-        <label>
-          Description
-          <textarea
-            placeholder="Description"
-            name="description"
-            value={description}
-            onChange={onDescriptionChange}
-          />
-        </label>
-
-        <input type="submit" value="Sign Up" />
-      </form>
-</div>
-      <Footer>
-        
-      </Footer>
+          <input type="submit" value="Sign Up" />
+        </form>
+      </div>
+      <Footer></Footer>
     </>
   );
 }
