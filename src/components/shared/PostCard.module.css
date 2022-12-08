@@ -12,6 +12,13 @@
     padding: 20px;
 
 }
+.italic{
+    font-style: italic;
+    font-weight: 100;
+    letter-spacing: .1rem; 
+    display: flex;
+    justify-content: center;
+}
 
 .title{
 font-size: 2rem;
@@ -24,6 +31,8 @@ padding: 10px;
     font-size: 1rem;
     padding: 5px;
     color: #777777;
+    display: block;
+    margin: auto;
 }
 .spans{
     display: flex;
@@ -38,25 +47,26 @@ padding: 10px;
     color: #777777;
 }
 
-.join{
-    margin-top: 15px;
-    transition-duration: 0.4s;
-    display: inline-block;
-    cursor: pointer;
-}
 
-.join button{
+.join button, .more button{
     background-color: #BF1E2E;
     border: none;
     padding: 15px 32px;
     color: white;
     border-radius: 10px;
     font-size: 14px;
-    font-family: Montserrat;
+cursor: pointer;
     transition-duration: 0.4s;
+    font-weight: 700;
 }
 
-.join:hover {
+.more button{
+    background-color: #353A5D;
+
+}
+
+
+.join:hover, .more::hove {
     -moz-box-shadow: 0 10px 80px rgba(2, 2, 2, 0.25);
     -webkit-box-shadow: 0 10px 90px rgba(0, 0, 0, .20);
     -goog-ms-box-shadow: 0 10px 60px #5c0a0a;
@@ -64,4 +74,15 @@ padding: 10px;
   }
 
 
+.buttons{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 1rem;
+}
 
+
+a{
+    color: #353A5D;
+}

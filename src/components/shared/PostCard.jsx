@@ -41,19 +41,28 @@ export default function PostCard() {
         return (
           <div className={style.card}>
             <div key={index}>
+              <span className={style.italic}>ENSEMBLE</span>
               {/* <h2>{post.id}</h2> */}
               <h1 className={style.title}>{post.name}</h1>
-              <p className={style.desc}>{post.description}</p>
+              {/* <p className={style.desc}>{post.description}</p> */}
               <p>
-                {" "}
-                <b>&#127925; {post.activeMusicians}</b>
+              
+                {/* {" "} */}
+                <b>&#127925; {post.activeMusicians} active musicians</b>
               </p>
+
+              <p>Practice Schedule: {post.practiceFrequency}</p>
               <div className={style.spans}>
-                <span> {post.practiceFrequency}</span>
-                <span> 📍 {post.genre}</span>
+                <a href ={post.link}>{post.link}</a>
+                {/* <span> 📍 {post.genre}</span> */}
               </div>
+              <div className={style.buttons}>
               <div className={style.join}>
                 <button>Join</button>
+              </div>
+              <div className={style.more}>
+                <button>See More</button>
+              </div>
               </div>
             </div>
           </div>
