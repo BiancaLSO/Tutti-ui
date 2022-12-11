@@ -47,7 +47,7 @@ export default function ShowModal({ showModal, closeModal }) {
       >
         <div id="container">
             <h1 className={styles.icon}>&#9742;</h1>
-<h2>Contact {user.fullName} </h2>
+            <h2>Contact {user.fullName} </h2>
 
               <div className={styles.phone}>
                 <p className={styles.modalInfo}> { user.phoneNo}</p>

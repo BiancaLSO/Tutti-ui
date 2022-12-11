@@ -19,6 +19,7 @@ export default function MusicianProfile() {
   const [phoneNo, setPhoneNo] = useState("");
   const [instrument, setInstrument] = useState("");
   const [description, setDescription] = useState("");
+  const [delUser, setDelUser] = useState(null);
 
 
   // SHOW MODAL CONTACT
@@ -85,9 +86,9 @@ export default function MusicianProfile() {
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
+    // const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
 
-    const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
+    // const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
 
     const data = {
       username,
@@ -116,6 +117,29 @@ export default function MusicianProfile() {
 
   };
 
+
+
+
+
+  // const  deleteProfile = () => {
+
+  //     const requestOptions = {
+  //           method: "DELETE",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Authorization: `Bearer ${tokenFromStorage}`,
+  //           },
+  //           mode: "cors"
+  //         };
+  //     fetch("http://localhost:3000/profile/" + idFromStorage, requestOptions)
+  //       .then((response) => response.json())
+  //     .then((res) => 
+      
+  //     console.log(res));
+
+
+   
+  // }
 
   return (
     <>

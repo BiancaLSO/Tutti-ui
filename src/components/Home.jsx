@@ -54,7 +54,7 @@ export default function Home() {
               <button>Search</button>
        </div>
        </div>
-      <div className={styles.cards}>
+      <div className={styles.cards} >
         <PostCard></PostCard>
       </div>
 

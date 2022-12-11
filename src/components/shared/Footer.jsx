@@ -18,11 +18,11 @@ function Footer() {
             <div className="footer-links">
               <div className="footer-link-wrapper">
                 <div className="footer-link-items">
-                  <span style={{ marginLeft: "70px" }}>
-                    <a href="/">Se opslag</a>
+                  <span style={{ marginLeft: "70px", color: "white" }}>
+                    <a style={{color: "white"}} href="/">Se opslag</a>
                   </span>
                   <span style={{ marginLeft: "10px" }}>
-                    <a href="/">Profil</a>
+                    <a style={{color: "white"}} href="/">Profil</a>
                   </span>
                 </div>
               </div>

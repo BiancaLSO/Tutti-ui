@@ -26,7 +26,7 @@ export default function Navigation() {
     <ul className={styles.navLinks}>
   
        <input type="checkbox" id="checkbox_toggle" />
-       <label for="checkbox_toggle" className={styles.hamburger}>&#9776;</label>
+       <label htmlFor="checkbox_toggle" className={styles.hamburger}>&#9776;</label>
 
        <div className={styles.menu}>
          <li><a href="/home">Posts</a></li>
