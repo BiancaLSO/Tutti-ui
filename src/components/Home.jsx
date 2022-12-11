@@ -1,16 +1,18 @@
 import styles from "./Home.module.css";
 import Footer from "./shared/Footer";
 import Navigation from "./shared/Navigation";
-import { useState, useEffect } from "react";
 import PostCard from "./shared/PostCard";
+import SearchBar from "./shared/SearchBar";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  const getFilteredEns = (query) => {
     setIsLoading(true);
-    fetch("http://localhost:3000/ensembles")
+
+    fetch(`http://localhost:3000/ensembles/filter?search=${query}`)
       .then((response) => {
         return response.json();
       })
@@ -25,18 +27,17 @@ export default function Home() {
 
           posts.push(post);
         }
-        setIsLoading(false);
         setPosts(posts);
-      });
-  }, [setPosts]);
+      })
+      .catch((error) => {
+        console.log("Error fetching and parsing data", error);
+      })
+      .finally(setIsLoading(false));
+  };
 
-  if (isLoading) {
-    return (
-      <section>
-        <p>Loading...</p>
-      </section>
-    );
-  }
+  useEffect(() => {
+    getFilteredEns("");
+  }, []);
 
   return (
     <>
@@ -45,17 +46,15 @@ export default function Home() {
         <p className={styles.headline}>
           Stedet hvor amatørmusikere finder hinanden og spiller musik sammen
         </p>
-        <img src="./assets/landing-img.png" className={styles.picLand}></img>
+        <img
+          src="./assets/landing-img.png"
+          alt="music notes"
+          className={styles.picLand}
+        ></img>
       </div>
-      <div>
-        <input placeholder="Enter Post Title" className={styles.searchBar}/>
-       
-       <div className={styles.searchBtn}>
-              <button>Search</button>
-       </div>
-       </div>
+      <SearchBar onSearch={getFilteredEns}></SearchBar>
       <div className={styles.cards}>
-        <PostCard></PostCard>
+        <PostCard posts={posts} isLoading={isLoading} />
       </div>
 
       <Footer></Footer>

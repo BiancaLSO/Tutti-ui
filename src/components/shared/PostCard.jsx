@@ -1,32 +1,6 @@
-import { useState, useEffect } from "react";
 import style from "./PostCard.module.css";
 
-export default function PostCard() {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("http://localhost:3000/ensembles")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const posts = [];
-
-        for (const key in data) {
-          const post = {
-            id: key,
-            ...data[key],
-          };
-
-          posts.push(post);
-        }
-        setIsLoading(false);
-        setPosts(posts);
-      });
-  }, [setPosts]);
-
+export default function PostCard({ isLoading, posts }) {
   if (isLoading) {
     return (
       <section>
