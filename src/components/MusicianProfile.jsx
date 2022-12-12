@@ -105,7 +105,6 @@ export default function MusicianProfile() {
       .then((res) => console.log(res));
   };
 
-<<<<<<< HEAD
 
 
 
@@ -130,8 +129,6 @@ export default function MusicianProfile() {
    
   // }
 
-=======
->>>>>>> search-post
   return (
     <>
       <Navigation></Navigation>
