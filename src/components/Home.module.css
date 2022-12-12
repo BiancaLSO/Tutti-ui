@@ -24,8 +24,9 @@
 
 .cards {
   display: grid;
+  grid-gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  row-gap: 1rem;
+  justify-content: center;
   padding: 20px;
   margin-bottom: 250px;
 }
@@ -40,65 +41,34 @@
 
   .picLand {
     align-self: center;
-    padding: 30px;
+    width: 100%;
+    height: 100%;
   }
+}
 
-  .picLand {
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    height: 50%;
-    padding: 100px;
-  }
+.searchBar {
+  display: inline-block;
+  width: 35%;
+  margin-top: 25px;
+  margin: 0 0 30px 30px;
+  font-size: 15px;
+  padding: 23px;
+}
 
-  .cards {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-    justify-content: center;
-    padding: 20px;
-    margin-bottom: 250px;
-  }
+.searchBtn {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 70px;
+}
 
-  @media (max-width: 50rem) {
-    .landing {
-      flex-direction: column;
-    }
-    .headline {
-      font-size: 2rem;
-    }
-
-    .picLand {
-      align-self: center;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .searchBar {
-    display: inline-block;
-    width: 35%;
-    margin-top: 25px;
-    margin: 0 0 30px 30px;
-    font-size: 15px;
-    padding: 23px;
-  }
-
-  .searchBtn {
-    cursor: pointer;
-    display: inline-block;
-    margin-left: 20px;
-    margin-bottom: 70px;
-  }
-
-  .searchBtn button {
-    background-color: #353a5d;
-    border: none;
-    padding: 15px 32px;
-    color: white;
-    border-radius: 10px;
-    font-size: 14px;
-    font-family: Montserrat;
-    transition-duration: 0.4s;
-  }
+.searchBtn button {
+  background-color: #353a5d;
+  border: none;
+  padding: 15px 32px;
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: Montserrat;
+  transition-duration: 0.4s;
 }
