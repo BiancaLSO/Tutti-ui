@@ -26,7 +26,7 @@ export default function LogIn() {
     setCredentials(" ");
 
     if (creds) {
-      setTimeout(navigate("/home"), 2000);
+      setTimeout(navigate("/"), 2000);
     }
   };
 

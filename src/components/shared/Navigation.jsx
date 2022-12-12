@@ -29,7 +29,7 @@ export default function Navigation() {
        <label htmlFor="checkbox_toggle" className={styles.hamburger}>&#9776;</label>
 
        <div className={styles.menu}>
-         <li><a href="/home">Posts</a></li>
+         <li><a href="/">Posts</a></li>
          <li style={{display: tokenFromStorage ? 'block' : 'none'}} className={styles.profile} ><a href="/musician">Profile</a></li>
          {/* <li className={styles.services}>
            <a href="/ensemble">Ensemble Profile</a>
