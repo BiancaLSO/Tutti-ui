@@ -14,7 +14,7 @@ export default function SearchBar({ onSearch }) {
   return (
     <div>
       <input
-        type="text"
+        type="search"
         className={styles.searchBar}
         value={query}
         onChange={onQueryChange}

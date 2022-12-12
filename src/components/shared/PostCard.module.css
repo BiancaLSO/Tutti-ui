@@ -3,7 +3,7 @@
 .card {
   display: flex;
   justify-content: center;
-
+  background-color: white;
   flex-direction: row;
   border: 2px solid hsl(0, 0%, 87%);
   border-radius: 10px;
@@ -85,6 +85,10 @@ a {
   color: #353a5d;
 }
 
+.music {
+  padding-left: 30px;
+}
+
 /* pop up */
 
 .popUp {
@@ -139,9 +143,12 @@ a {
   padding-right: 30px;
 }
 
-.genre {
+.practice {
   text-align: center;
   margin-top: auto;
+}
+.genre {
+  padding-left: 10px;
 }
 
 .popUpTitle {
@@ -171,5 +178,4 @@ a {
 .popUpNav:hover {
   display: inline-block;
   border-bottom: 3px solid #bf1e2e;
-  /* transition: 0.3s ease; */
 }

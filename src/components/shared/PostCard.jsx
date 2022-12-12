@@ -100,11 +100,8 @@ export default function PostCard({ posts }) {
             <div key={index}>
               <span className={style.italic}>ENSEMBLE {post._id}</span>
               <h1 className={style.title}>{post.name}</h1>
-              <p>
-                <b>&#127925; {post.activeMusicians} active musicians</b>
-              </p>
+              <div className={style.genre}> &#127925; {post.genre}</div>
 
-              <p>Practice Schedule: {post.practiceFrequency}</p>
               <div className={style.spans}>
                 <a href={post.link}>{post.link}</a>
               </div>
@@ -135,11 +132,13 @@ export default function PostCard({ posts }) {
                   <div className={style.popupCard}>
                     <h1 className={style.titles}>{popup.name}</h1>
                     <div className={style.location}> 📍 {popup.address}</div>
-                    <div className={style.description}>
-                      {" "}
-                      {popup.description}
-                    </div>
-                    <div className={style.genre}> &#127925; {popup.genre}</div>
+                    <div className={style.description}>{popup.description}</div>
+                    <p className={style.practice}>
+                      Practice Schedule: {popup.practiceFrequency}
+                    </p>{" "}
+                    <p className={style.music}>
+                      <b>&#127925; {popup.activeMusicians} active musicians</b>
+                    </p>
                   </div>
                 );
               })}

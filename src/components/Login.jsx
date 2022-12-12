@@ -49,6 +49,7 @@ export default function LogIn() {
       <Navigation></Navigation>
       <div className={styles.center}>
         <form className={styles} onSubmit={handleLogin}>
+          <h2>Log In</h2>
           <label>
             Username
             <input
