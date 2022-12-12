@@ -60,14 +60,23 @@ export default function MusicianProfile() {
       .then((response) => {
         return response.json();
       })
-      .then((data) => setUser(data));
+      .then((data) => {
+        setUser(data);
+        setUsername(data.username);
+        setEmail(data.email);
+        setFullName(data.fullName);
+        setPhoneNo(data.phoneNo);
+        setPassword(data.password);
+        setInstrument(data.instrument);
+        setDescription(data.description);
+      });
   }, []);
 
   // UPDATE FORM FUNCTIONALITY
 
   const onUsernameChange = (e) => setUsername(e.target.value);
   const onEmailChange = (e) => setEmail(e.target.value);
-  const onPasswordChange = (e) => setEmail(e.target.value);
+  const onPasswordChange = (e) => setPassword(e.target.value);
   const onNameChange = (e) => setFullName(e.target.value);
   const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
   const onInstrumentChange = (e) => setInstrument(e.target.value);
@@ -75,11 +84,11 @@ export default function MusicianProfile() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-
     // const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
 
     // const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
 
+    console.log(password);
     const data = {
       username,
       email,
@@ -90,6 +99,7 @@ export default function MusicianProfile() {
       description,
     };
 
+    console.log("data", data);
     const requestOptions = {
       method: "PUT",
       headers: {
@@ -120,8 +130,7 @@ export default function MusicianProfile() {
   //     .then((res) =>
 
   //     console.log(res));
-
-  // }
+  // };
 
   return (
     <>
@@ -201,7 +210,7 @@ export default function MusicianProfile() {
               />
             </label>
 
-            <label>
+            {/* <label>
               Password
               <input
                 type="password"
@@ -210,7 +219,7 @@ export default function MusicianProfile() {
                 defaultValue={user.password}
                 onChange={onPasswordChange}
               />
-            </label>
+            </label> */}
 
             <label>
               Phone Number
