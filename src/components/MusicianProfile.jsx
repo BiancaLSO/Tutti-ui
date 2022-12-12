@@ -31,7 +31,7 @@ export default function MusicianProfile() {
     setIsShown((current) => !current);
   };
 
-  // GET LOCALSTORAGE TOKEN
+  // GET LOCALSTORAGE TOKEN & ID
   const getToken = () => {
     return localStorage.getItem("token");
   };
