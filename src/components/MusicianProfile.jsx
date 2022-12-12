@@ -4,6 +4,7 @@ import Navigation from "./shared/Navigation";
 import Footer from "./shared/Footer";
 import { useState, useEffect } from "react";
 import ShowModal from "./Modal";
+import { useNavigate } from "react-router-dom";
 
 export default function MusicianProfile() {
   const [user, setUser] = useState([]);
@@ -17,6 +18,7 @@ export default function MusicianProfile() {
   const [instrument, setInstrument] = useState("");
   const [description, setDescription] = useState("");
   const [delUser, setDelUser] = useState(null);
+  const navigate = useNavigate();
 
   // SHOW MODAL CONTACT
   const handleModal = () => {
@@ -113,6 +115,7 @@ export default function MusicianProfile() {
     fetch("http://localhost:3000/profile/" + idFromStorage, requestOptions)
       .then((response) => response.json())
       .then((res) => console.log(res));
+    window.location.reload(true);
   };
 
   // const  deleteProfile = () => {
