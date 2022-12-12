@@ -1,46 +1,16 @@
 import style from "./PostCard.module.css";
+import { useState, useEffect } from "react";
 
-export default function PostCard({ isLoading, posts }) {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default function PostCard({ posts }) {
   const [popupcontent, setPopupcontent] = useState([]);
   const [popUpToggle, setPopUpToggle] = useState(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("http://localhost:3000/ensembles")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const posts = [];
-
-        for (const key in data) {
-          const post = {
-            id: key,
-            ...data[key],
-          };
-
-          posts.push(post);
-        }
-        setIsLoading(false);
-        setPosts(posts);
-      });
-  }, [setPosts]);
-
-  if (isLoading) {
-    return (
-      <section>
-        <p>Loading...</p>
-      </section>
-    );
-  }
 
   // show modal for each post
   const changeContent = (post) => {
     setPopupcontent([post]);
     setPopUpToggle(!popUpToggle);
   };
+
   return (
     <>
       {posts.map((post, index) => {

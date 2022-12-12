@@ -105,11 +105,6 @@ export default function MusicianProfile() {
       .then((res) => console.log(res));
   };
 
-<<<<<<< HEAD
-
-
-
-
   // const  deleteProfile = () => {
 
   //     const requestOptions = {
@@ -122,16 +117,12 @@ export default function MusicianProfile() {
   //         };
   //     fetch("http://localhost:3000/profile/" + idFromStorage, requestOptions)
   //       .then((response) => response.json())
-  //     .then((res) => 
-      
+  //     .then((res) =>
+
   //     console.log(res));
 
-
-   
   // }
 
-=======
->>>>>>> search-post
   return (
     <>
       <Navigation></Navigation>
