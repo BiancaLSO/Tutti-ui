@@ -17,8 +17,8 @@ export default function MusicianProfile() {
   const [phoneNo, setPhoneNo] = useState("");
   const [instrument, setInstrument] = useState("");
   const [description, setDescription] = useState("");
-  const [delUser, setDelUser] = useState(null);
   const navigate = useNavigate();
+  const [popUpToggle, setPopUpToggle] = useState(false);
 
   // SHOW MODAL CONTACT
   const handleModal = () => {
@@ -31,6 +31,10 @@ export default function MusicianProfile() {
   // HIDE USER INFO AND SHOW FORM
   const handleClick = () => {
     setIsShown((current) => !current);
+  };
+
+  const showDelModal = () => {
+    setPopUpToggle((current) => !current);
   };
 
   // GET LOCALSTORAGE TOKEN
@@ -118,22 +122,30 @@ export default function MusicianProfile() {
     window.location.reload(true);
   };
 
-  // const  deleteProfile = () => {
+  const handleClickDel = () => {
+    const tokenFromStorage = getToken().replace(/^"(.*)"$/, "$1");
 
-  //     const requestOptions = {
-  //           method: "DELETE",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: `Bearer ${tokenFromStorage}`,
-  //           },
-  //           mode: "cors"
-  //         };
-  //     fetch("http://localhost:3000/profile/" + idFromStorage, requestOptions)
-  //       .then((response) => response.json())
-  //     .then((res) =>
-
-  //     console.log(res));
-  // };
+    const idFromStorage = getId().replace(/^"(.*)"$/, "$1");
+    const logout = () => {
+      navigate("/signup");
+      localStorage.clear();
+    };
+    const requestOptions = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenFromStorage}`,
+      },
+    };
+    fetch("http://localhost:3000/profile/" + idFromStorage, requestOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result);
+      });
+    logout();
+  };
 
   return (
     <>
@@ -166,7 +178,9 @@ export default function MusicianProfile() {
               <button className={styles.update} onClick={handleClick}>
                 Update profile
               </button>
-              <button className={styles.delete}>Delete profile</button>
+              <button className={styles.delete} onClick={showDelModal}>
+                Delete profile
+              </button>
             </div>
           </div>
         </div>
@@ -260,7 +274,31 @@ export default function MusicianProfile() {
           </form>
         </div>
       )}
+
       <ShowModal showModal={showModal} closeModal={closeModal} />
+
+      {popUpToggle && (
+        <div className={styles.popUp}>
+          <div
+            className={styles.popUpBody}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.popUpContent}>
+              <div className={styles.ques}>
+                <b>Are you sure you want to DELETE your account?</b>
+              </div>
+              <div className={styles.buttons}>
+                <button className={styles.delete} onClick={handleClickDel}>
+                  Yes
+                </button>
+                <button className={styles.update} onClick={showDelModal}>
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <Footer></Footer>
     </>
   );
