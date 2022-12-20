@@ -1,35 +1,67 @@
 import style from "./PostCard.module.css";
 import { useState, useEffect } from "react";
+import styles from "./SearchBar.module.css";
 
 export default function PostCard({ posts }) {
   const [popupcontent, setPopupcontent] = useState([]);
   const [popUpToggle, setPopUpToggle] = useState(false);
-
+  const [q, setQ] = useState("");
+  const [searchParam] = useState(["name", "genre"]);
   // show modal for each post
   const changeContent = (post) => {
     setPopupcontent([post]);
     setPopUpToggle(!popUpToggle);
   };
 
+  
+  function search(posts) {
+    return posts.filter((item) => {
+        return searchParam.some((newItem) => {
+            return (
+                item[newItem]
+                    .toString()
+                    .toLowerCase()
+                    .indexOf(q.toLowerCase()) > -1
+            );
+        });
+    });
+}
   return (
-    <>
-      {posts.map((post, index) => {
+    
+ 
+
+    <>   
+<div className={styles.searchWrapper}>
+    <input
+        type="search"
+        name="search-form"
+        id="search-form"
+        className={styles.searchBar}
+        placeholder="Search for..."
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+    />
+</div>
+
+   
+<main>
+        {search(posts).map((item) => {
         return (
           <div className={style.card}>
-            <div key={index}>
+            <div key={item}>
               <span className={style.italic}>ENSEMBLE</span>
-              <h1 className={style.title}>{post.name}</h1>
-              <div className={style.genre}> &#127925; {post.genre}</div>
+              <h1 className={style.title}>{item.name}</h1>
+              <div className={style.genre}> &#127925; {item.genre}</div>
 
               <div className={style.spans}>
-                <a href={post.link}>{post.link}</a>
+                <a href={item.link}>{item.link}</a>
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
                   <button>Join</button>
                 </div>
                 <div className={style.more}>
-                  <button onClick={() => changeContent(post)}>See More</button>
+                  <button onClick={() => changeContent(item)}>See More</button>
                 </div>
               </div>
             </div>
@@ -65,6 +97,12 @@ export default function PostCard({ posts }) {
           </div>
         </div>
       )}
+
+</main>
     </>
+
+
+
+
   );
 }

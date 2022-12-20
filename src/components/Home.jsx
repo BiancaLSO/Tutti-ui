@@ -52,7 +52,7 @@ export default function Home() {
           className={styles.picLand}
         ></img>
       </div>
-      <SearchBar onSearch={getFilteredEns}></SearchBar>
+      {/* <SearchBar onSearch={getFilteredEns}></SearchBar> */}
       <div className={styles.cards}>
         <PostCard posts={posts} isLoading={isLoading} />
       </div>
