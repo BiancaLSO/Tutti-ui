@@ -9,13 +9,21 @@ export default function PostCard({ posts }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Get User Id & Token from Local Storage
-  const tokenFromStorage = localStorage
-    .getItem("token")
-    .replace(/^"(.*)"$/, "$1");
-  const idFromStorage = localStorage.getItem("id").replace(/^"(.*)"$/, "$1");
+  const getToken = () => {
+    return localStorage.getItem("token").replace(/^"(.*)"$/, "$1");
+  };
+  const getId = () => {
+    return localStorage.getItem("id").replace(/^"(.*)"$/, "$1");
+  };
+
+  const setEnsemble = (id) => {
+    return localStorage.setItem("ensemble", getEnsembleId(id));
+  };
 
   // Get the Ensemble Object based on the specific id
   const getEnsembleId = (id) => {
+    setIsModalOpen(!isModalOpen);
+    const tokenFromStorage = getToken();
     const requestOptions = {
       method: "GET",
       headers: {
@@ -38,13 +46,10 @@ export default function PostCard({ posts }) {
   };
 
   // Add the specific ensemble to the user's profile
-  const joinEnsemble = (id, ensemble) => {
-    console.log("You joined th ensemble");
+  const joinEnsemble = (ensemble) => {
+    const tokenFromStorage = getToken();
+    const idFromStorage = getId();
 
-    const data = {
-      id,
-      ensemble,
-    };
     const requestOptions = {
       method: "POST",
       headers: {
@@ -52,7 +57,7 @@ export default function PostCard({ posts }) {
         Authorization: `Bearer ${tokenFromStorage}`,
       },
       mode: "cors",
-      body: JSON.stringify(data),
+      body: JSON.stringify(ensemble),
     };
 
     fetch(
@@ -60,20 +65,12 @@ export default function PostCard({ posts }) {
       requestOptions
     )
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((ensemble) => {
+        console.log(ensemble);
       })
       .catch((err) => {
         console.log(err.message);
       });
-  };
-
-  // Open modal & Join ensemble
-  const handleJoin = (id) => {
-    setIsModalOpen(!isModalOpen);
-    console.log(id);
-    const ensemble = getEnsembleId(id);
-    joinEnsemble(idFromStorage, ensemble);
   };
 
   // Close the Joined modal
@@ -96,18 +93,17 @@ export default function PostCard({ posts }) {
     <>
       {posts.map((post, index) => {
         return (
-          <div className={style.card}>
-            <div key={index}>
+          <div className={style.card} key={index}>
+            <div>
               <span className={style.italic}>ENSEMBLE {post._id}</span>
               <h1 className={style.title}>{post.name}</h1>
               <div className={style.genre}> &#127925; {post.genre}</div>
-
               <div className={style.spans}>
                 <a href={post.link}>{post.link}</a>
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                  <button onClick={() => handleJoin(post._id)}>Join</button>
+                  <button onClick={() => getEnsembleId(post._id)}>+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -154,9 +150,13 @@ export default function PostCard({ posts }) {
               <button className={style.delete} onClick={closeModal}>
                 X
               </button>
-              <p className={style.popUpTitle}>You joined the ensemble!</p>
+              <p className={style.popUpTitle}>
+                Are you sure you want to join the Ensemble?
+              </p>
             </div>
             <div className={style.popUpContent}>
+              <button onClick={joinEnsemble}> YES</button>
+              <button onClick={closeModal}> NO</button>
               <p className={style.popUpText}>
                 You can see your joined ensembles in your profile under
                 <span className={style.popUpNav} onClick={redirectEnsembles}>
