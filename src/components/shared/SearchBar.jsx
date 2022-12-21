@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./SearchBar.module.css";
 
 export default function SearchBar({ onSearch }) {
@@ -6,22 +6,19 @@ export default function SearchBar({ onSearch }) {
 
   const onQueryChange = (e) => setQuery(e.target.value);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     onSearch(query);
-  };
+  }, [query]);
 
   return (
     <div>
       <input
         type="search"
+        placeholder="Type in to search"
         className={styles.searchBar}
         value={query}
         onChange={onQueryChange}
       />
-      <div className={styles.searchBtn}>
-        <button onClick={handleSearch}>Search</button>
-      </div>
     </div>
   );
 }
