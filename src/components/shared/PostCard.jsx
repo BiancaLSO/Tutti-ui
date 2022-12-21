@@ -1,11 +1,84 @@
 import style from "./PostCard.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PostCard({ posts }) {
+  const navigate = useNavigate();
   const [popupcontent, setPopupcontent] = useState([]);
   const [popUpToggle, setPopUpToggle] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
 
-  // show modal for each post
+  // Get User Id & Token from Local Storage
+  const getToken = () => {
+    return localStorage.getItem("token").replace(/^"(.*)"$/, "$1");
+  };
+  const getId = () => {
+    return localStorage.getItem("id").replace(/^"(.*)"$/, "$1");
+  };
+
+  // Get the Ensemble Object based on the specific id
+  const getEnsembleId = (id) => {
+    setIsModalOpen(!isModalOpen);
+    const tokenFromStorage = getToken();
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenFromStorage}`,
+      },
+      mode: "cors",
+    };
+
+    fetch("http://localhost:3000/ensembles/by/" + id, requestOptions)
+      .then((response) => response.json())
+      .then((ensemble) => {
+        setSelectedEnsemble(ensemble);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  console.log("Selectensd: " + selectedEnsemble);
+  // Add the specific ensemble to the user's profile
+  const joinEnsemble = () => {
+    const tokenFromStorage = getToken();
+    const idFromStorage = getId();
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenFromStorage}`,
+      },
+      mode: "cors",
+      body: JSON.stringify(selectedEnsemble),
+    };
+
+    fetch(
+      `http://localhost:3000/profile/${idFromStorage}/ensembles`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => {
+        console.log(err.message);
+      })
+      .finally(() => setSelectedEnsemble(undefined));
+  };
+
+  // Close the Joined modal
+  const closeModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  // Redirect button to the My Ensembles in the Joined modal
+  const redirectEnsembles = () => {
+    navigate("/musician");
+  };
+
+  // Show modal for each post
   const changeContent = (post) => {
     setPopupcontent([post]);
     setPopUpToggle(!popUpToggle);
@@ -15,18 +88,17 @@ export default function PostCard({ posts }) {
     <>
       {posts.map((post, index) => {
         return (
-          <div className={style.card}>
-            <div key={index}>
-              <span className={style.italic}>ENSEMBLE</span>
+          <div className={style.card} key={index}>
+            <div>
+              <span className={style.italic}>ENSEMBLE {post._id}</span>
               <h1 className={style.title}>{post.name}</h1>
               <div className={style.genre}> &#127925; {post.genre}</div>
-
               <div className={style.spans}>
                 <a href={post.link}>{post.link}</a>
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                  <button>Join</button>
+                  <button onClick={() => getEnsembleId(post._id)}>+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -61,6 +133,33 @@ export default function PostCard({ posts }) {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isModalOpen && (
+        <div className={style.popUp}>
+          <div className={style.popUpBody}>
+            <div className={style.popUpHeader}>
+              <button className={style.delete} onClick={closeModal}>
+                X
+              </button>
+              <p className={style.popUpTitle}>
+                Are you sure you want to join the Ensemble?
+              </p>
+            </div>
+            <div className={style.popUpContent}>
+              <button onClick={joinEnsemble}> YES</button>
+              <button onClick={closeModal}> NO</button>
+              <p className={style.popUpText}>
+                You can see your joined ensembles in your profile under
+                <span className={style.popUpNav} onClick={redirectEnsembles}>
+                  {" "}
+                  My Ensembles
+                </span>
+                .
+              </p>
             </div>
           </div>
         </div>
