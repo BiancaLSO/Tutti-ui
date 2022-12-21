@@ -40,7 +40,6 @@ export default function PostCard({ posts }) {
       });
   };
 
-  console.log("Selectensd: " + selectedEnsemble);
   // Add the specific ensemble to the user's profile
   const joinEnsemble = () => {
     const tokenFromStorage = getToken();
@@ -90,7 +89,7 @@ export default function PostCard({ posts }) {
         return (
           <div className={style.card} key={index}>
             <div>
-              <span className={style.italic}>ENSEMBLE {post._id}</span>
+              <span className={style.italic}>ENSEMBLE</span>
               <h1 className={style.title}>{post.name}</h1>
               <div className={style.genre}> &#127925; {post.genre}</div>
               <div className={style.spans}>
@@ -150,8 +149,14 @@ export default function PostCard({ posts }) {
               </p>
             </div>
             <div className={style.popUpContent}>
-              <button onClick={joinEnsemble}> YES</button>
-              <button onClick={closeModal}> NO</button>
+              <div className={style.joinSet}>
+                <button onClick={joinEnsemble} className={style.joinBtn}>
+                  YES
+                </button>
+                <button onClick={closeModal} className={style.joinBtn}>
+                  NO
+                </button>
+              </div>
               <p className={style.popUpText}>
                 You can see your joined ensembles in your profile under
                 <span className={style.popUpNav} onClick={redirectEnsembles}>

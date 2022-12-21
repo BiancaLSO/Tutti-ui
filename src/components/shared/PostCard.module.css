@@ -162,8 +162,9 @@ a {
 }
 
 .popUpText {
+  margin-top: 25px;
   text-align: center;
-  font-size: 20px;
+  font-size: 15px;
   padding-top: 10px;
   margin-left: 20px;
   margin-right: 20px;
@@ -172,10 +173,27 @@ a {
 .popUpNav {
   color: #bf1e2e;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .popUpNav:hover {
-  display: inline-block;
   border-bottom: 3px solid #bf1e2e;
+}
+
+.joinSet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.joinBtn {
+  background-color: #353a5d;
+  border: none;
+  padding: 15px 32px;
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  font-weight: 700;
 }
