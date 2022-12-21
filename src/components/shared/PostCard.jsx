@@ -7,6 +7,7 @@ export default function PostCard({ posts }) {
   const [popupcontent, setPopupcontent] = useState([]);
   const [popUpToggle, setPopUpToggle] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
 
   // Get User Id & Token from Local Storage
   const getToken = () => {
@@ -14,10 +15,6 @@ export default function PostCard({ posts }) {
   };
   const getId = () => {
     return localStorage.getItem("id").replace(/^"(.*)"$/, "$1");
-  };
-
-  const setEnsemble = (id) => {
-    return localStorage.setItem("ensemble", getEnsembleId(id));
   };
 
   // Get the Ensemble Object based on the specific id
@@ -34,19 +31,18 @@ export default function PostCard({ posts }) {
     };
 
     fetch("http://localhost:3000/ensembles/by/" + id, requestOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
+      .then((response) => response.json())
+      .then((ensemble) => {
+        setSelectedEnsemble(ensemble);
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
 
+  console.log("Selectensd: " + selectedEnsemble);
   // Add the specific ensemble to the user's profile
-  const joinEnsemble = (ensemble) => {
+  const joinEnsemble = () => {
     const tokenFromStorage = getToken();
     const idFromStorage = getId();
 
@@ -57,7 +53,7 @@ export default function PostCard({ posts }) {
         Authorization: `Bearer ${tokenFromStorage}`,
       },
       mode: "cors",
-      body: JSON.stringify(ensemble),
+      body: JSON.stringify(selectedEnsemble),
     };
 
     fetch(
@@ -65,12 +61,11 @@ export default function PostCard({ posts }) {
       requestOptions
     )
       .then((response) => response.json())
-      .then((ensemble) => {
-        console.log(ensemble);
-      })
+      .then((response) => console.log(response))
       .catch((err) => {
         console.log(err.message);
-      });
+      })
+      .finally(() => setSelectedEnsemble(undefined));
   };
 
   // Close the Joined modal
