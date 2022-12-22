@@ -91,12 +91,12 @@ h2{
     font-weight: 700;
  }
 
- p{
-    font-size: 20px;
-    display: none;
- }
+ /* Error messages */
+p {
+    padding-top: 8px;
+}
 
-input:invalid ~ p{
+input:invalid[focused="true"]~ p{
     display: block;
 }
 
