@@ -147,11 +147,12 @@ export default function PostCard({ posts }) {
               <button className={style.delete} onClick={closeModal}>
                 X
               </button>
+              </div>
+            <div className={style.popUpContentEns}>
               <p className={style.popUpTitle}>
-                Are you sure you want to join the Ensemble?
+                Are you sure you want to join this Ensemble?
               </p>
-            </div>
-            <div className={style.popUpContent}>
+        
               <div className={style.joinSet}>
                 <button onClick={joinEnsemble} className={style.joinBtn}>
                   YES

@@ -102,9 +102,22 @@ a {
   background-color: rgba(255, 255, 255, 0.5);
   padding-top: 15%;
   color: #353a5d;
-  z-index: 99;
-}
 
+}
+.popUpContentEns{
+  display: flex;
+  flex-direction: column;
+  transform: translateY(40%) !important;
+
+}
+.popUpContent{
+  display: flex;
+  flex-direction: column;
+}
+.activeMusicians{
+  position: fixed;
+  bottom: 0;
+}
 .popUpBody {
   width: 50%;
   height: 50%;
@@ -133,7 +146,7 @@ a {
 }
 
 .description {
-  padding-left: 30px;
+  padding-left: 30px !important;
   margin-top: 30px;
   font-size: 1.2rem;
 }
@@ -176,6 +189,7 @@ a {
   color: #bf1e2e;
   font-weight: 700;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .popUpNav:hover {
@@ -183,19 +197,30 @@ a {
 }
 
 .joinSet {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: flex !important;
+  flex-direction: row !important;
+  column-gap: 1.3rem !important;
+  justify-content: center;
 }
 
 .joinBtn {
-  background-color: #353a5d;
-  border: none;
+  background-color: white;
+  border: 1px solid #353a5d;
   padding: 15px 32px;
-  color: white;
+  color: #353a5d;
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
   transition-duration: 0.4s;
   font-weight: 700;
+}
+.joinBtn:hover{
+  background-color: #353a5d;
+  color: white;
+}
+
+@media (max-width: 50rem){
+  .popUpContent{
+    transform: translateY(20%);
+  }
 }
