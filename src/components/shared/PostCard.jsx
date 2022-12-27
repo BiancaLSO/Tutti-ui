@@ -17,6 +17,9 @@ export default function PostCard({ posts }) {
     return localStorage.getItem("id").replace(/^"(.*)"$/, "$1");
   };
 
+
+  const tokenFromStorageEmpty = localStorage.getItem("token");
+  
   // Get the Ensemble Object based on the specific id
   const getEnsembleId = (id) => {
     setIsModalOpen(!isModalOpen);
@@ -97,7 +100,7 @@ export default function PostCard({ posts }) {
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                  <button onClick={() => getEnsembleId(post._id)}>+</button>
+                  <button onClick={() => getEnsembleId(post._id)} style={{ display: tokenFromStorageEmpty ? "block" : "none" }}>+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
