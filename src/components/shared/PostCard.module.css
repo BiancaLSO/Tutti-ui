@@ -218,6 +218,17 @@ a {
   background-color: #353a5d;
   color: white;
 }
+.join button:disabled {
+  opacity: 0.65;
+
+}
+
+/* .join button:disabled::before{
+  content: none;
+}
+.join button:disabled::after{
+  content: '✔️';
+} */
 
 @media (max-width: 50rem){
   .popUpContent{
