@@ -25,7 +25,7 @@ export default function SignUp() {
   const [isUsernameValid, setUsernameIsValid] = useState(true);
   const [isEmailValid, setEmailIsValid] = useState(true);
   const [isPasswordValid, setPasswordIsValid] = useState(true);
-  const [focused, setFocused] = useState(false);
+  
 
   const onUsernameChange = (e) => {setUsername(e.target.value); setUsernameIsValid(true);};
   const onEmailChange = (e) => {setEmail(e.target.value); setEmailIsValid(true); };
@@ -34,7 +34,7 @@ export default function SignUp() {
   const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
   const onInstrumentChange = (e) => setInstrument(e.target.value);
   const onDescriptionChange = (e) => setDescription(e.target.value);
-  const handleFocus = (e) =>  {setFocused(true)};
+
 
   const clearForm = () => {
     setUsername("");
@@ -49,11 +49,11 @@ export default function SignUp() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const valid = validateUsername(username);
-    const validE = validateEmail(email);
-    const validp = validatePassword(password);
+    const isUsernameValid = validateUsername(username);
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
 
-    if (valid && validE && validp) {
+    if (isUsernameValid && isEmailValid && isPasswordValid) {
       setUsernameError("");
       setEmailError("");
       setPasswordError("");
@@ -69,7 +69,7 @@ export default function SignUp() {
       description,
       ensmebles,
     };
-
+    
     const requestOptions = {
       method: "POST",
       headers: {
@@ -86,13 +86,20 @@ export default function SignUp() {
     navigate("/auth/login");
     clearForm();
   } else {
+  if (!isUsernameValid) {
+    setUsernameError("Username must be at least 3-10 characters and no special characters!");
     setUsernameIsValid(false);
+  }
+  if (!isEmailValid) {
+    setEmailError("Please enter a valid email address!");
     setEmailIsValid(false);
+  }
+  if (!isPasswordValid) {
+    setPasswordError("Password must be at least 5 characters long with at least one letter and one number!");
     setPasswordIsValid(false);
-    setUsernameError ("Username must be at least 3-10 characters and no special characters!");
-    setEmailError ("Please enter valid email address!");
-    setPasswordError("Password must be at least 5 characters long with at least one letter and one number!");}
-  }  
+  }
+  }
+}
 
   return (
     <>
@@ -107,16 +114,9 @@ export default function SignUp() {
               name="username"
               value={username}
               onChange={onUsernameChange}
-              required
-              pattern= "^[A-Za-z0-9]{3,10}$"
-              onBlur={handleFocus}
-              focused={focused.toString("")}
+              className={!isUsernameValid ? styles.invalid : ""}
             />
-            { isUsernameValid ? <p style={{ color: "red" }}>{usernameError}</p> : 
-           <p style={{ display: "none" }}> </p> }
-
-           {/* { focused ? (isUsernameValid ? usernameError : setUsernameIsValid) : 
-           <p style={{ display: "none" }}> </p> } */}
+            {!isUsernameValid && <div className={styles.error}>{usernameError}</div>}
           </label>
 
           <label>
@@ -127,12 +127,9 @@ export default function SignUp() {
               name="email"
               value={email}
               onChange={onEmailChange}
-              required
-              onBlur={handleFocus}
-              focused={focused.toString()}
+              className={!isEmailValid ? styles.invalid : ""}
             />
-            { isEmailValid ? <p style={{ color: "red" }}>{emailError}</p> : 
-           <p style={{ display: "none" }}> </p> }
+          {!isEmailValid && <div className={styles.error}>{emailError}</div>}
           </label>
 
           <label>
@@ -143,13 +140,9 @@ export default function SignUp() {
               name="password"
               value={password}
               onChange={onPasswordChange}
-              required
-              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
-              onBlur={handleFocus}
-              focused={focused.toString()}
+              className={!isPasswordValid ? styles.invalid : ""}
             />
-            { isPasswordValid ? <p style={{ color: "red" }}>{passwordError}</p> : 
-           <p style={{ display: "none" }}> </p> }
+            {!isPasswordValid && <div className={styles.error}>{passwordError}</div>}
           </label>
 
           <label>
@@ -202,3 +195,4 @@ export default function SignUp() {
     </>
   );
 }
+

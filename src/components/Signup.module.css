@@ -92,13 +92,16 @@ h2{
  }
 
  /* Error messages */
-p {
-    padding-top: 8px;
-}
 
-input:invalid[focused="true"]~ p{
-    display: block;
-}
+.invalid {
+    border-color: #f44336;
+  }
+  
+.error {
+    font-size: 0.8rem;
+    color: #f44336;
+    margin-top: 0.5rem;
+  }
 
 /* musician profile */
 
