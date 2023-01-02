@@ -57,7 +57,7 @@ export default function PostCard({ posts }) {
   };
 
   // Add the specific ensemble to the user's profile
-  const joinEnsemble = () => {
+  const joinEnsemble = (index) => {
     const tokenFromStorage = getToken();
     const idFromStorage = getId();
 
@@ -82,28 +82,19 @@ export default function PostCard({ posts }) {
       })
       .finally(() => setSelectedEnsemble(undefined));
       setIsModalOpen(!isModalOpen);
+
+
+      setIsButtonDisabled(prevState => ({
+        activeButtonIndex: {
+          ...prevState.activeButtonIndex,
+          [index]: true,
+        },
+      }));
+      // return (
+      // buttonDisabled.activeButtonIndex[index]
+      // )
   };
 
-  // Close the Joined modal
-  // const closeModalEns = (index) =>{
-  //   setIsModalOpen(!isModalOpen);
-  //   setIsButtonDisabled(prevState => ({
-  //     activeButtonIndex: {
-  //       ...prevState.activeButtonIndex,
-  //       [index]: false,
-  //     },
-  //   }));
-
-  // };
-  const setButtonDisabled = (index) => {
-  
-    setIsButtonDisabled(prevState => ({
-      activeButtonIndex: {
-        ...prevState.activeButtonIndex,
-        [index]: true,
-      },
-    }));
-  };
 
 
   const handleOtherButtonClick = (index) => {
@@ -146,7 +137,7 @@ export default function PostCard({ posts }) {
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                <button key={index} onClick={() => { getEnsembleId(post._id);  setButtonDisabled(index); }} style={{ display: tokenFromStorageEmpty ? "block" : "none" }} disabled={buttonDisabled.activeButtonIndex[index]}>+</button>
+                <button key={index} onClick={() => { getEnsembleId(post._id);}} style={{ display: tokenFromStorageEmpty ? "block" : "none" }}>+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -201,9 +192,7 @@ export default function PostCard({ posts }) {
               </p>
         
               <div className={style.joinSet}>
-                <button onClick={joinEnsemble} className={style.joinBtn}>
-                  YES
-                </button>
+              <button  onClick={ joinEnsemble } disabled={buttonDisabled.activeButtonIndex[index]} className={style.joinBtn}>yes</button>
                 <button onClick={handleOtherButtonClick} className={style.joinBtn}>NO</button>
 
 
