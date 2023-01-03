@@ -32,7 +32,7 @@ export default function Navigation() {
             <a href="/">Posts</a>
           </li>
           <li>
-            <a href="/ensembles">Create a Post</a>
+            <a href="/ensembles">Create Post</a>
           </li>
           <li
             style={{ display: tokenFromStorage ? "block" : "none" }}
