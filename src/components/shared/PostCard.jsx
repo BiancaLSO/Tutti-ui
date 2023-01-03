@@ -31,6 +31,43 @@ export default function PostCard({ posts }) {
 
 
   const tokenFromStorageEmpty = localStorage.getItem("token");
+
+
+  // const setButtonDisabled = (index) => {
+  //   setIsButtonDisabled(prevState => ({
+  //     activeButtonIndex: {
+  //       ...prevState.activeButtonIndex,
+  //       [index]: true,
+  //     },
+  //   }));
+  // };
+  const setButtonDisabled = (index) => {
+    setIsButtonDisabled(prevState => ({
+      ...prevState, // spread the previous state object
+      activeButtonIndex: {
+        ...prevState.activeButtonIndex, // spread the previous activeButtonIndex object
+        [index]: true, // update the value at the index key
+      },
+    }));
+  };
+  
+  
+
+
+  
+  const handleOtherButtonClick = (index) => {
+    setIsModalOpen(!isModalOpen);
+    setIsButtonDisabled(prevState => ({
+      activeButtonIndex: {
+        ...prevState.activeButtonIndex,
+        [index]: false, // enable the button for the clicked post
+      },
+    }));
+  };
+  
+  
+
+
   
   // Get the Ensemble Object based on the specific id
   const getEnsembleId = (id) => {
@@ -61,7 +98,8 @@ export default function PostCard({ posts }) {
     if (buttonDisabled.activeButtonIndex[index]) {
       return;
     }
-    setButtonDisabled(index);
+    setButtonDisabled({ [index]: true });
+
     const tokenFromStorage = getToken();
     const idFromStorage = getId();
 
@@ -94,25 +132,7 @@ export default function PostCard({ posts }) {
       setIsModalOpen(!isModalOpen);
   };
 
-  const setButtonDisabled = (index) => {
-    setIsButtonDisabled(prevState => ({
-      activeButtonIndex: {
-        ...prevState.activeButtonIndex,
-        [index]: true,
-      },
-    }));
-  };
-  
-  const handleOtherButtonClick = (index) => {
-    setIsModalOpen(!isModalOpen);
-    setIsButtonDisabled(prevState => ({
-      activeButtonIndex: {
-        ...prevState.activeButtonIndex,
-        [index]: false, // enable the button for the clicked post
-      },
-    }));
-  };
-  
+
   
 
 
