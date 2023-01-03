@@ -8,19 +8,6 @@ export default function PostCard({ posts }) {
   const [popUpToggle, setPopUpToggle] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
-  const [buttonDisabled, setIsButtonDisabled] = useState({
-    activeButtonIndex: {},
-   
-
-  });
-
-
-  
-// console.log(buttonDisabled.activeButtonIndex)
-
-// const dataIs = buttonDisabled.activeButtonIndex;
-// window.localStorage.setItem('MY_APP_STATE', JSON.stringify(dataIs));
-
 
   // Get User Id & Token from Local Storage
   const getToken = () => {
@@ -81,36 +68,12 @@ export default function PostCard({ posts }) {
         console.log(err.message);
       })
       .finally(() => setSelectedEnsemble(undefined));
-      setIsModalOpen(!isModalOpen);
-
-
-      setIsButtonDisabled(prevState => ({
-        activeButtonIndex: {
-          ...prevState.activeButtonIndex,
-          [index]: true,
-        },
-      }));
-      // return (
-      // buttonDisabled.activeButtonIndex[index]
-      // )
   };
 
-
-
-  const handleOtherButtonClick = (index) => {
+  // Close the Joined modal
+  const closeModal = () => {
     setIsModalOpen(!isModalOpen);
-    if (buttonDisabled.activeButtonIndex.hasOwnProperty(index)) {
-      setIsButtonDisabled(prevState => ({
-        activeButtonIndex: {
-          ...prevState.activeButtonIndex,
-          [index]: false,
-        },
-      }));
-    }
   };
-  
-  
-
 
   // Redirect button to the My Ensembles in the Joined modal
   const redirectEnsembles = () => {
@@ -137,7 +100,7 @@ export default function PostCard({ posts }) {
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                <button key={index} onClick={() => { getEnsembleId(post._id);}} style={{ display: tokenFromStorageEmpty ? "block" : "none" }}>+</button>
+                  <button onClick={() => getEnsembleId(post._id)} style={{ display: tokenFromStorageEmpty ? "block" : "none" }}>+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -178,13 +141,12 @@ export default function PostCard({ posts }) {
       )}
 
       {isModalOpen && (
- 
         <div className={style.popUp}>
           <div className={style.popUpBody}>
             <div className={style.popUpHeader}>
-              {/* <button className={style.delete} onClick={closeModal}>
+              <button className={style.delete} onClick={closeModal}>
                 X
-              </button> */}
+              </button>
               </div>
             <div className={style.popUpContentEns}>
               <p className={style.popUpTitle}>
@@ -192,12 +154,12 @@ export default function PostCard({ posts }) {
               </p>
         
               <div className={style.joinSet}>
-              <button  onClick={ joinEnsemble } disabled={buttonDisabled.activeButtonIndex[index]} className={style.joinBtn}>yes</button>
-                <button onClick={handleOtherButtonClick} className={style.joinBtn}>NO</button>
-
-
-
-
+                <button onClick={joinEnsemble} className={style.joinBtn}>
+                  YES
+                </button>
+                <button onClick={closeModal} className={style.joinBtn}>
+                  NO
+                </button>
               </div>
               <p className={style.popUpText}>
                 You can see your joined ensembles in your profile under
@@ -210,7 +172,6 @@ export default function PostCard({ posts }) {
             </div>
           </div>
         </div>
-
       )}
     </>
   );

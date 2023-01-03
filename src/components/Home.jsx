@@ -54,7 +54,6 @@ export default function Home() {
       </div>
       <SearchBar onSearch={getFilteredEns}></SearchBar>
       <div className={styles.cards}>
-        
         <PostCard posts={posts} isLoading={isLoading} />
       </div>
 
