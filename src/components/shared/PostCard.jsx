@@ -10,9 +10,8 @@ export default function PostCard({ posts }) {
   const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
   const [buttonDisabled, setIsButtonDisabled] = useState({
     activeButtonIndex: {},
-   
-
   });
+ 
 
 
   
@@ -50,6 +49,7 @@ export default function PostCard({ posts }) {
       .then((response) => response.json())
       .then((ensemble) => {
         setSelectedEnsemble(ensemble);
+     
       })
       .catch((err) => {
         console.log(err.message);
@@ -58,6 +58,10 @@ export default function PostCard({ posts }) {
 
   // Add the specific ensemble to the user's profile
   const joinEnsemble = (index) => {
+    if (buttonDisabled.activeButtonIndex[index]) {
+      return;
+    }
+    setButtonDisabled(index);
     const tokenFromStorage = getToken();
     const idFromStorage = getId();
 
@@ -80,23 +84,17 @@ export default function PostCard({ posts }) {
       .catch((err) => {
         console.log(err.message);
       })
-      .finally(() => setSelectedEnsemble(undefined));
+      .finally(() => setSelectedEnsemble(undefined),
+      
+      
+      
+      
+      
+      );
       setIsModalOpen(!isModalOpen);
   };
 
-  // Close the Joined modal
-  // const closeModalEns = (index) =>{
-  //   setIsModalOpen(!isModalOpen);
-  //   setIsButtonDisabled(prevState => ({
-  //     activeButtonIndex: {
-  //       ...prevState.activeButtonIndex,
-  //       [index]: false,
-  //     },
-  //   }));
-
-  // };
   const setButtonDisabled = (index) => {
-  
     setIsButtonDisabled(prevState => ({
       activeButtonIndex: {
         ...prevState.activeButtonIndex,
@@ -104,18 +102,15 @@ export default function PostCard({ posts }) {
       },
     }));
   };
-
-
+  
   const handleOtherButtonClick = (index) => {
     setIsModalOpen(!isModalOpen);
-    if (buttonDisabled.activeButtonIndex.hasOwnProperty(index)) {
-      setIsButtonDisabled(prevState => ({
-        activeButtonIndex: {
-          ...prevState.activeButtonIndex,
-          [index]: false,
-        },
-      }));
-    }
+    setIsButtonDisabled(prevState => ({
+      activeButtonIndex: {
+        ...prevState.activeButtonIndex,
+        [index]: false, // enable the button for the clicked post
+      },
+    }));
   };
   
   
@@ -146,7 +141,9 @@ export default function PostCard({ posts }) {
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                <button key={index} onClick={() => { getEnsembleId(post._id);  setButtonDisabled(index); }} style={{ display: tokenFromStorageEmpty ? "block" : "none" }} disabled={buttonDisabled.activeButtonIndex[index]}>+</button>
+                <button key={index} disabled={buttonDisabled['activeButtonIndex'][index]} onClick={() => {
+      getEnsembleId(post._id);
+    }} style={{ display: tokenFromStorageEmpty ? "block" : "none" }} >+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -201,7 +198,7 @@ export default function PostCard({ posts }) {
               </p>
         
               <div className={style.joinSet}>
-                <button onClick={joinEnsemble} className={style.joinBtn}>
+                <button onClick={() => joinEnsemble()}  className={style.joinBtn}>
                   YES
                 </button>
                 <button onClick={handleOtherButtonClick} className={style.joinBtn}>NO</button>
