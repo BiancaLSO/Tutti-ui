@@ -28,3 +28,18 @@ export function validateUsername(input) {
     }
   }
   
+  export function validateName(input){
+    if (input === "" || input === undefined || input === null) {
+      return false;
+    } else {
+      return true
+    }
+  }
+
+  export function validateDesc(input){
+    if (input === "" || input === undefined || input === null) {
+      return false;
+    } else {
+      return true
+    }
+  }

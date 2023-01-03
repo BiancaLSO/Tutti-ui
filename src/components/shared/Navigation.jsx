@@ -31,6 +31,9 @@ export default function Navigation() {
           <li>
             <a href="/">Posts</a>
           </li>
+          <li>
+            <a href="/ensembles">Create a Post</a>
+          </li>
           <li
             style={{ display: tokenFromStorage ? "block" : "none" }}
             className={styles.profile}
