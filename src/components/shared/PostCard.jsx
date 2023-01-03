@@ -9,7 +9,8 @@ export default function PostCard({ posts }) {
   const [popUpToggle, setPopUpToggle] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
-  const [isAlerOpen, setIsAlertOpen] = useState(false)
+  const [isAlerOpen, setIsAlertOpen] = useState(false);
+  const [isJoined, setIsJoined] = useState(false);
 
   // Get User Id & Token from Local Storage
   const getToken = () => {
@@ -69,7 +70,10 @@ export default function PostCard({ posts }) {
       else if(!response.ok){
         closeModal();
       }
-      else return response.json();
+      else{
+        showJoined()
+        return response.json();
+      }
     })
       .then((response) => console.log(response))
       .catch((err) => {
@@ -77,7 +81,11 @@ export default function PostCard({ posts }) {
         showModal()
         
       })
-      .finally(() => setSelectedEnsemble(undefined));
+      .finally(() => setSelectedEnsemble(undefined),
+    
+      );
+
+
   };
 
   // Close the Joined modal
@@ -90,8 +98,19 @@ setIsAlertOpen(!isAlerOpen)
 setTimeout(() => {
   closeModal();
   setIsAlertOpen(isAlerOpen)
-}, 300);
+}, 1000);
 }
+
+
+const showJoined= () => {
+  setIsJoined(!isJoined)
+  closeModal();
+  setTimeout(() => {
+    setIsJoined(isJoined)
+  }, 1000);
+  }
+
+
    // Redirect button to the My Ensembles in the Joined modal
   const redirectEnsembles = () => {
     navigate("/musician");
@@ -193,18 +212,27 @@ setTimeout(() => {
 
 
 
-
 {isAlerOpen && (
         <div className={style.popUp}>
           <div className={style.popUpBody}>
-            <div className={style.popUpHeader}>
-              {/* <button className={style.delete} onClick={closeModal}>
-                X
-              </button> */}
-              </div>
-            <div className={style.popUpContentEns}>
+            <div className={style.popUpContentJoin}>
               <p className={style.popUpTitle}>
-                Joined mf
+              You have already joined this Ensemble! 😊
+              </p>
+        
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
+{isJoined && (
+        <div className={style.popUp}>
+          <div className={style.popUpBody}>
+            <div className={style.popUpContentJoin}>
+              <p className={style.popUpTitle}>
+              You successfully joined this ensemble! 🎉
               </p>
         
             </div>
