@@ -5,6 +5,7 @@ import Footer from "./shared/Footer";
 import { useState, useEffect } from "react";
 import ShowModal from "./Modal";
 import { useNavigate } from "react-router-dom";
+import MyEnsemble from "./shared/MyEnsemble";
 
 export default function MusicianProfile() {
   const [user, setUser] = useState([]);
@@ -17,6 +18,8 @@ export default function MusicianProfile() {
   const [phoneNo, setPhoneNo] = useState("");
   const [instrument, setInstrument] = useState("");
   const [description, setDescription] = useState("");
+  const [ensembles, setEnsembles] = useState([]);
+
   const navigate = useNavigate();
   const [popUpToggle, setPopUpToggle] = useState(false);
 
@@ -75,14 +78,15 @@ export default function MusicianProfile() {
         setPassword(data.password);
         setInstrument(data.instrument);
         setDescription(data.description);
+        setEnsembles(data.ensembles);
+        console.log(data);
       });
-  }, []);
+  }, [idFromStorage, tokenFromStorage]);
 
   // UPDATE FORM FUNCTIONALITY
-
   const onUsernameChange = (e) => setUsername(e.target.value);
   const onEmailChange = (e) => setEmail(e.target.value);
-  const onPasswordChange = (e) => setPassword(e.target.value);
+  // const onPasswordChange = (e) => setPassword(e.target.value);
   const onNameChange = (e) => setFullName(e.target.value);
   const onPhoneNoChange = (e) => setPhoneNo(e.target.value);
   const onInstrumentChange = (e) => setInstrument(e.target.value);
@@ -151,7 +155,6 @@ export default function MusicianProfile() {
     <>
       <Navigation></Navigation>
 
-      {/* <h2 st>Create a profile</h2> */}
       <h1 className={styles.heading}>Hi, {user.username}! &#128075;</h1>
       {!isShown && (
         <div className={styles.grid}>
@@ -173,7 +176,6 @@ export default function MusicianProfile() {
             </div>
             <div className={styles.infodesc}>About me: </div>
             <span className={styles.span}>{user.description}</span>
-
             <div className={styles.buttons}>
               <button className={styles.update} onClick={handleClick}>
                 Update profile
@@ -186,9 +188,19 @@ export default function MusicianProfile() {
         </div>
       )}
       {!isShown && (
-        <div className={styles.gridEnsembles}>
+        <>
           <h1 className={styles.heading}>My Ensembles</h1>
-        </div>
+          <div className={styles.gridEnsembles}>
+            {ensembles.map((ensemble, index) => (
+              <MyEnsemble
+                key={index}
+                name={ensemble.name}
+                genre={ensemble.genre}
+                link={ensemble.link}
+              />
+            ))}
+          </div>
+        </>
       )}
 
       {isShown && (
@@ -299,7 +311,7 @@ export default function MusicianProfile() {
           </div>
         </div>
       )}
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

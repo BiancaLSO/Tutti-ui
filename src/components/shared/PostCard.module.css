@@ -102,19 +102,17 @@ a {
   background-color: rgba(255, 255, 255, 0.5);
   padding-top: 15%;
   color: #353a5d;
-
 }
-.popUpContentEns{
+.popUpContentEns {
   display: flex;
   flex-direction: column;
   transform: translateY(40%) !important;
-
 }
-.popUpContent{
+.popUpContent {
   display: flex;
   flex-direction: column;
 }
-.activeMusicians{
+.activeMusicians {
   position: fixed;
   bottom: 0;
 }
@@ -179,7 +177,7 @@ a {
 .popUpText {
   margin-top: 25px;
   text-align: center;
-  font-size: 15px;
+  font-size: 25px;
   padding-top: 10px;
   margin-left: 20px;
   margin-right: 20px;
@@ -188,7 +186,7 @@ a {
 .popUpNav {
   color: #bf1e2e;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 25px;
   cursor: pointer;
 }
 
@@ -214,13 +212,13 @@ a {
   transition-duration: 0.4s;
   font-weight: 700;
 }
-.joinBtn:hover{
+.joinBtn:hover {
   background-color: #353a5d;
   color: white;
 }
 
-@media (max-width: 50rem){
-  .popUpContent{
+@media (max-width: 50rem) {
+  .popUpContent {
     transform: translateY(20%);
   }
 }

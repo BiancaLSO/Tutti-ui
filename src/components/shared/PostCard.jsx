@@ -8,6 +8,7 @@ export default function PostCard({ posts }) {
   const [popUpToggle, setPopUpToggle] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
+  const [hideButtons, setHideButtons] = useState(false);
 
   // Get User Id & Token from Local Storage
   const getToken = () => {
@@ -17,9 +18,8 @@ export default function PostCard({ posts }) {
     return localStorage.getItem("id").replace(/^"(.*)"$/, "$1");
   };
 
-
   const tokenFromStorageEmpty = localStorage.getItem("token");
-  
+
   // Get the Ensemble Object based on the specific id
   const getEnsembleId = (id) => {
     setIsModalOpen(!isModalOpen);
@@ -68,13 +68,18 @@ export default function PostCard({ posts }) {
         console.log(err.message);
       })
       .finally(() => setSelectedEnsemble(undefined));
+    togglleButtons();
   };
 
   // Close the Joined modal
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
+    togglleButtons();
   };
 
+  const togglleButtons = () => {
+    setHideButtons(!hideButtons);
+  };
   // Redirect button to the My Ensembles in the Joined modal
   const redirectEnsembles = () => {
     navigate("/musician");
@@ -100,7 +105,14 @@ export default function PostCard({ posts }) {
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                  <button onClick={() => getEnsembleId(post._id)} style={{ display: tokenFromStorageEmpty ? "block" : "none" }}>+</button>
+                  <button
+                    onClick={() => getEnsembleId(post._id)}
+                    style={{
+                      display: tokenFromStorageEmpty ? "block" : "none",
+                    }}
+                  >
+                    +
+                  </button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -147,28 +159,35 @@ export default function PostCard({ posts }) {
               <button className={style.delete} onClick={closeModal}>
                 X
               </button>
-              </div>
+            </div>
             <div className={style.popUpContentEns}>
-              <p className={style.popUpTitle}>
-                Are you sure you want to join this Ensemble?
-              </p>
-        
-              <div className={style.joinSet}>
-                <button onClick={joinEnsemble} className={style.joinBtn}>
-                  YES
-                </button>
-                <button onClick={closeModal} className={style.joinBtn}>
-                  NO
-                </button>
-              </div>
-              <p className={style.popUpText}>
-                You can see your joined ensembles in your profile under
-                <span className={style.popUpNav} onClick={redirectEnsembles}>
-                  {" "}
-                  My Ensembles
-                </span>
-                .
-              </p>
+              {!hideButtons && (
+                <p className={style.popUpTitle}>
+                  Are you sure you want to join this Ensemble?
+                </p>
+              )}
+
+              {!hideButtons && (
+                <div className={style.joinSet}>
+                  <button onClick={joinEnsemble} className={style.joinBtn}>
+                    YES
+                  </button>
+                  <button onClick={closeModal} className={style.joinBtn}>
+                    NO
+                  </button>
+                </div>
+              )}
+
+              {hideButtons && (
+                <p className={style.popUpText}>
+                  You can see your joined ensembles in your profile under
+                  <span className={style.popUpNav} onClick={redirectEnsembles}>
+                    {" "}
+                    My Ensembles
+                  </span>
+                  .
+                </p>
+              )}
             </div>
           </div>
         </div>

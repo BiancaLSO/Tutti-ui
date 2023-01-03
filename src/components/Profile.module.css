@@ -84,9 +84,11 @@ h3.secondHeading {
 }
 
 .gridEnsembles {
-  height: 50vh;
-  display: flex;
-  flex-direction: row;
+  height: 80vh;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  padding-left: 40px;
 }
 
 .buttons {
