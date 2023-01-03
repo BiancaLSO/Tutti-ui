@@ -2,6 +2,7 @@ import style from "./PostCard.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function PostCard({ posts }) {
   const navigate = useNavigate();
   const [popupcontent, setPopupcontent] = useState([]);
@@ -9,6 +10,8 @@ export default function PostCard({ posts }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
   const [hideButtons, setHideButtons] = useState(false);
+  const [isAlerOpen, setIsAlertOpen] = useState(false);
+  const [isJoined, setIsJoined] = useState(false);
 
   // Get User Id & Token from Local Storage
   const getToken = () => {
@@ -62,13 +65,27 @@ export default function PostCard({ posts }) {
       `http://localhost:3000/profile/${idFromStorage}/ensembles`,
       requestOptions
     )
-      .then((response) => response.json())
+    .then((response) => {
+      if(!response.ok) throw new Error(response.status);
+      else if(!response.ok){
+        closeModal();
+      }
+      else{
+        showJoined()
+        return response.json();
+      }
+    })
       .then((response) => console.log(response))
       .catch((err) => {
-        console.log(err.message);
+     
+        showModal()
+        
       })
       .finally(() => setSelectedEnsemble(undefined));
-    togglleButtons();
+
+      
+
+
   };
 
   // Close the Joined modal
@@ -76,11 +93,30 @@ export default function PostCard({ posts }) {
     setIsModalOpen(!isModalOpen);
     togglleButtons();
   };
+const showModal = () => {
+setIsAlertOpen(!isAlerOpen)
 
+
+  // Redirect button to the My Ensembles in the Joined modal
+setTimeout(() => {
+  closeModal();
+  setIsAlertOpen(isAlerOpen)
+}, 1000);
+}
   const togglleButtons = () => {
     setHideButtons(!hideButtons);
   };
-  // Redirect button to the My Ensembles in the Joined modal
+
+const showJoined= () => {
+  setIsJoined(!isJoined)
+  closeModal();
+  setTimeout(() => {
+    setIsJoined(isJoined)
+  }, 1000);
+  }
+
+
+   // Redirect button to the My Ensembles in the Joined modal
   const redirectEnsembles = () => {
     navigate("/musician");
   };
@@ -188,6 +224,36 @@ export default function PostCard({ posts }) {
                   .
                 </p>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
+{isAlerOpen && (
+        <div className={style.popUp}>
+          <div className={style.popUpBody}>
+            <div className={style.popUpContentJoin}>
+              <p className={style.popUpTitle}>
+              You have already joined this Ensemble! 😊
+              </p>
+        
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
+{isJoined && (
+        <div className={style.popUp}>
+          <div className={style.popUpBody}>
+            <div className={style.popUpContentJoin}>
+              <p className={style.popUpTitle}>
+              You successfully joined this ensemble! 🎉
+              </p>
+        
             </div>
           </div>
         </div>

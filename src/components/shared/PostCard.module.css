@@ -108,7 +108,15 @@ a {
   flex-direction: column;
   transform: translateY(40%) !important;
 }
-.popUpContent {
+
+
+.popUpContentJoin{
+  display: flex;
+  flex-direction: column;
+  transform: translateY(200%) !important;
+
+}
+.popUpContent{
   display: flex;
   flex-direction: column;
 }
@@ -128,6 +136,8 @@ a {
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
+
+
 
 .popUpHeader button {
   width: 98%;
@@ -215,6 +225,11 @@ a {
 .joinBtn:hover {
   background-color: #353a5d;
   color: white;
+}
+.popUpJoin{
+  text-align: center;
+  display: block;
+  margin: auto;
 }
 
 @media (max-width: 50rem) {
