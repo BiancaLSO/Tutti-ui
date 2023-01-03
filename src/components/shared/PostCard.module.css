@@ -106,14 +106,14 @@ a {
 .popUpContentEns {
   display: flex;
   flex-direction: column;
-  transform: translateY(40%) !important;
+  transform: translateY(80%) !important;
 }
 
 
 .popUpContentJoin{
   display: flex;
   flex-direction: column;
-  transform: translateY(200%) !important;
+  transform: translateY(55%) !important;
 
 }
 .popUpContent{

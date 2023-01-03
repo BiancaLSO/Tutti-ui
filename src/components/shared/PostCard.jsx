@@ -9,7 +9,6 @@ export default function PostCard({ posts }) {
   const [popUpToggle, setPopUpToggle] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
-  const [hideButtons, setHideButtons] = useState(false);
   const [isAlerOpen, setIsAlertOpen] = useState(false);
   const [isJoined, setIsJoined] = useState(false);
 
@@ -21,8 +20,9 @@ export default function PostCard({ posts }) {
     return localStorage.getItem("id").replace(/^"(.*)"$/, "$1");
   };
 
-  const tokenFromStorageEmpty = localStorage.getItem("token");
 
+  const tokenFromStorageEmpty = localStorage.getItem("token");
+  
   // Get the Ensemble Object based on the specific id
   const getEnsembleId = (id) => {
     setIsModalOpen(!isModalOpen);
@@ -81,9 +81,9 @@ export default function PostCard({ posts }) {
         showModal()
         
       })
-      .finally(() => setSelectedEnsemble(undefined));
-
-      
+      .finally(() => setSelectedEnsemble(undefined),
+    
+      );
 
 
   };
@@ -91,28 +91,23 @@ export default function PostCard({ posts }) {
   // Close the Joined modal
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
-    togglleButtons();
   };
 const showModal = () => {
 setIsAlertOpen(!isAlerOpen)
 
-
-  // Redirect button to the My Ensembles in the Joined modal
 setTimeout(() => {
   closeModal();
   setIsAlertOpen(isAlerOpen)
-}, 1000);
+}, 3000);
 }
-  const togglleButtons = () => {
-    setHideButtons(!hideButtons);
-  };
+
 
 const showJoined= () => {
   setIsJoined(!isJoined)
   closeModal();
   setTimeout(() => {
     setIsJoined(isJoined)
-  }, 1000);
+  }, 3000);
   }
 
 
@@ -141,14 +136,7 @@ const showJoined= () => {
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                  <button
-                    onClick={() => getEnsembleId(post._id)}
-                    style={{
-                      display: tokenFromStorageEmpty ? "block" : "none",
-                    }}
-                  >
-                    +
-                  </button>
+                  <button onClick={() => getEnsembleId(post._id)} style={{ display: tokenFromStorageEmpty ? "block" : "none" }}>+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -195,35 +183,21 @@ const showJoined= () => {
               <button className={style.delete} onClick={closeModal}>
                 X
               </button>
-            </div>
+              </div>
             <div className={style.popUpContentEns}>
-              {!hideButtons && (
-                <p className={style.popUpTitle}>
-                  Are you sure you want to join this Ensemble?
-                </p>
-              )}
+              <p className={style.popUpTitle}>
+                Are you sure you want to join this Ensemble?
+              </p>
+        
+              <div className={style.joinSet}>
+                <button onClick={joinEnsemble} className={style.joinBtn}>
+                  YES
+                </button>
+                <button onClick={closeModal} className={style.joinBtn}>
+                  NO
+                </button>
+              </div>
 
-              {!hideButtons && (
-                <div className={style.joinSet}>
-                  <button onClick={joinEnsemble} className={style.joinBtn}>
-                    YES
-                  </button>
-                  <button onClick={closeModal} className={style.joinBtn}>
-                    NO
-                  </button>
-                </div>
-              )}
-
-              {hideButtons && (
-                <p className={style.popUpText}>
-                  You can see your joined ensembles in your profile under
-                  <span className={style.popUpNav} onClick={redirectEnsembles}>
-                    {" "}
-                    My Ensembles
-                  </span>
-                  .
-                </p>
-              )}
             </div>
           </div>
         </div>
@@ -238,7 +212,14 @@ const showJoined= () => {
               <p className={style.popUpTitle}>
               You have already joined this Ensemble! 😊
               </p>
-        
+              <p className={style.popUpText}>
+                You can see your joined ensembles in your profile under
+                <span className={style.popUpNav} onClick={redirectEnsembles}>
+                  {" "}
+                  My Ensembles
+                </span>
+                .
+              </p>
             </div>
           </div>
         </div>
@@ -253,7 +234,14 @@ const showJoined= () => {
               <p className={style.popUpTitle}>
               You successfully joined this ensemble! 🎉
               </p>
-        
+              <p className={style.popUpText}>
+                You can see your joined ensembles in your profile under
+                <span className={style.popUpNav} onClick={redirectEnsembles}>
+                  {" "}
+                  My Ensembles
+                </span>
+                .
+              </p>
             </div>
           </div>
         </div>
