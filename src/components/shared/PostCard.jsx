@@ -2,24 +2,14 @@ import style from "./PostCard.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function PostCard({ posts }) {
   const navigate = useNavigate();
   const [popupcontent, setPopupcontent] = useState([]);
   const [popUpToggle, setPopUpToggle] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEnsemble, setSelectedEnsemble] = useState(undefined);
-  const [buttonDisabled, setIsButtonDisabled] = useState({
-    activeButtonIndex: {},
-  });
- 
-
-
-  
-// console.log(buttonDisabled.activeButtonIndex)
-
-// const dataIs = buttonDisabled.activeButtonIndex;
-// window.localStorage.setItem('MY_APP_STATE', JSON.stringify(dataIs));
-
+  const [isAlerOpen, setIsAlertOpen] = useState(false)
 
   // Get User Id & Token from Local Storage
   const getToken = () => {
@@ -31,43 +21,6 @@ export default function PostCard({ posts }) {
 
 
   const tokenFromStorageEmpty = localStorage.getItem("token");
-
-
-  // const setButtonDisabled = (index) => {
-  //   setIsButtonDisabled(prevState => ({
-  //     activeButtonIndex: {
-  //       ...prevState.activeButtonIndex,
-  //       [index]: true,
-  //     },
-  //   }));
-  // };
-  const setButtonDisabled = (index) => {
-    setIsButtonDisabled(prevState => ({
-      ...prevState, // spread the previous state object
-      activeButtonIndex: {
-        ...prevState.activeButtonIndex, // spread the previous activeButtonIndex object
-        [index]: true, // update the value at the index key
-      },
-    }));
-  };
-  
-  
-
-
-  
-  const handleOtherButtonClick = (index) => {
-    setIsModalOpen(!isModalOpen);
-    setIsButtonDisabled(prevState => ({
-      activeButtonIndex: {
-        ...prevState.activeButtonIndex,
-        [index]: false, // enable the button for the clicked post
-      },
-    }));
-  };
-  
-  
-
-
   
   // Get the Ensemble Object based on the specific id
   const getEnsembleId = (id) => {
@@ -86,7 +39,6 @@ export default function PostCard({ posts }) {
       .then((response) => response.json())
       .then((ensemble) => {
         setSelectedEnsemble(ensemble);
-     
       })
       .catch((err) => {
         console.log(err.message);
@@ -94,12 +46,7 @@ export default function PostCard({ posts }) {
   };
 
   // Add the specific ensemble to the user's profile
-  const joinEnsemble = (index) => {
-    if (buttonDisabled.activeButtonIndex[index]) {
-      return;
-    }
-    setButtonDisabled({ [index]: true });
-
+  const joinEnsemble = () => {
     const tokenFromStorage = getToken();
     const idFromStorage = getId();
 
@@ -117,26 +64,35 @@ export default function PostCard({ posts }) {
       `http://localhost:3000/profile/${idFromStorage}/ensembles`,
       requestOptions
     )
-      .then((response) => response.json())
+    .then((response) => {
+      if(!response.ok) throw new Error(response.status);
+      else if(!response.ok){
+        closeModal();
+      }
+      else return response.json();
+    })
       .then((response) => console.log(response))
       .catch((err) => {
-        console.log(err.message);
+     
+        showModal()
+        
       })
-      .finally(() => setSelectedEnsemble(undefined),
-      
-      
-      
-      
-      
-      );
-      setIsModalOpen(!isModalOpen);
+      .finally(() => setSelectedEnsemble(undefined));
   };
 
+  // Close the Joined modal
+  const closeModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+const showModal = () => {
+setIsAlertOpen(!isAlerOpen)
 
-  
-
-
-  // Redirect button to the My Ensembles in the Joined modal
+setTimeout(() => {
+  closeModal();
+  setIsAlertOpen(isAlerOpen)
+}, 300);
+}
+   // Redirect button to the My Ensembles in the Joined modal
   const redirectEnsembles = () => {
     navigate("/musician");
   };
@@ -161,9 +117,7 @@ export default function PostCard({ posts }) {
               </div>
               <div className={style.buttons}>
                 <div className={style.join}>
-                <button key={index} disabled={buttonDisabled['activeButtonIndex'][index]} onClick={() => {
-      getEnsembleId(post._id);
-    }} style={{ display: tokenFromStorageEmpty ? "block" : "none" }} >+</button>
+                  <button onClick={() => getEnsembleId(post._id)} style={{ display: tokenFromStorageEmpty ? "block" : "none" }}>+</button>
                 </div>
                 <div className={style.more}>
                   <button onClick={() => changeContent(post)}>See More</button>
@@ -204,13 +158,12 @@ export default function PostCard({ posts }) {
       )}
 
       {isModalOpen && (
- 
         <div className={style.popUp}>
           <div className={style.popUpBody}>
             <div className={style.popUpHeader}>
-              {/* <button className={style.delete} onClick={closeModal}>
+              <button className={style.delete} onClick={closeModal}>
                 X
-              </button> */}
+              </button>
               </div>
             <div className={style.popUpContentEns}>
               <p className={style.popUpTitle}>
@@ -218,14 +171,12 @@ export default function PostCard({ posts }) {
               </p>
         
               <div className={style.joinSet}>
-                <button onClick={() => joinEnsemble()}  className={style.joinBtn}>
+                <button onClick={joinEnsemble} className={style.joinBtn}>
                   YES
                 </button>
-                <button onClick={handleOtherButtonClick} className={style.joinBtn}>NO</button>
-
-
-
-
+                <button onClick={closeModal} className={style.joinBtn}>
+                  NO
+                </button>
               </div>
               <p className={style.popUpText}>
                 You can see your joined ensembles in your profile under
@@ -238,7 +189,27 @@ export default function PostCard({ posts }) {
             </div>
           </div>
         </div>
+      )}
 
+
+
+
+{isAlerOpen && (
+        <div className={style.popUp}>
+          <div className={style.popUpBody}>
+            <div className={style.popUpHeader}>
+              {/* <button className={style.delete} onClick={closeModal}>
+                X
+              </button> */}
+              </div>
+            <div className={style.popUpContentEns}>
+              <p className={style.popUpTitle}>
+                Joined mf
+              </p>
+        
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
