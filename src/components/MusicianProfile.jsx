@@ -81,7 +81,7 @@ export default function MusicianProfile() {
         setEnsembles(data.ensembles);
         console.log(data);
       });
-  }, [idFromStorage, tokenFromStorage]);
+  }, []);
 
   // UPDATE FORM FUNCTIONALITY
   const onUsernameChange = (e) => setUsername(e.target.value);
