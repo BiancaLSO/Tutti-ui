@@ -103,7 +103,7 @@ export default function CreateEnsemble() {
       <div className={styles.center}>
         <form className={styles} onSubmit={handleSubmit}>
           <label>
-            Name
+        Ensemble Name
             <input
               type="text"
               placeholder="Name"
