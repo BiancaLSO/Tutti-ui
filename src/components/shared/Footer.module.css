@@ -48,6 +48,7 @@ a {
   footer {
     grid-template-columns: 1fr;
     height: auto;
+    margin-left: auto;
   }
 
   .columnThree img {
