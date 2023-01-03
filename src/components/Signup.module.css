@@ -89,6 +89,55 @@ input[type="submit"] {
   filter: drop-shadow(0 2px 4px #00000029);
   font-weight: 700;
 }
+h2{
+    display: flex;
+    padding-left: 2rem;
+    color: #353A5D;
+    text-align: center;
+    justify-content: center;
+}
+
+ input[type="radio"]{
+    display: flex !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    text-align: center;
+    flex-direction: row!important;
+    row-gap: 0 !important;
+ }
+
+ .radio{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: .3rem;
+ }
+
+ input[type="submit"]{
+    height: 2rem;
+    border-radius: 7px; 
+    background-color: #353A5D;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none; 
+    display: inline-block;
+    font-size: 1rem;
+    filter: drop-shadow(0 2px 4px #00000029);
+    font-weight: 700;
+ }
+
+ /* Error messages */
+
+.invalid {
+    border-color: #f44336;
+  }
+  
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
 
 /* musician profile */
 
