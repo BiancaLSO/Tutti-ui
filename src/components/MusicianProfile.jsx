@@ -311,7 +311,7 @@ export default function MusicianProfile() {
           </div>
         </div>
       )}
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </>
   );
 }
